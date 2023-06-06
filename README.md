@@ -1,2 +1,2 @@
 # riemannian-geometry
-Exercises on Riemannian geometry
+Exercises on Riemannian geometry (in Japanese)
