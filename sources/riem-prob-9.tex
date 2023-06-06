@@ -1,0 +1,84 @@
+%! TeX program = upLaTeX
+\RequirePackage{plautopatch}
+\documentclass[uplatex,dvipdfmx,fontsize=12pt,jafontsize=11pt,line_length=42zw,number_of_lines=36,hanging_punctuation]{jlreq}
+\usepackage{jlreq-deluxe}
+\usepackage{libertinus}
+\usepackage[T1]{fontenc}
+\usepackage{libertinust1math}
+\usepackage{eucal}
+\usepackage{mathnotes-jlreq}
+\usepackage{tensor}
+
+\pagestyle{empty}
+
+\jlreqsetup{
+	itemization_label_length = 2.5zw,
+	itemization_labelsep = .5zw,
+}
+\setlength{\leftmargini}{3\zw}
+
+\newcommand{\bdry}{\partial}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\compose}{\mathbin{\circ}}
+\DeclareMathOperator{\Ric}{Ric}
+\DeclareMathOperator{\id}{id}
+
+\begin{document}
+
+\begin{flushleft}
+	幾何学4\,／\,微分幾何学概論I（松本）
+	\hfill
+	2022年12月12日
+\end{flushleft}
+\setcounter{section}{8}
+\section{Hopf--Rinowの定理}
+
+\begin{enumerate-problems}
+	\item[9.1]
+		$M=\mathbb{R}^2\setminus\set{0}$とおく．
+		$\mathbb{R}^2$のEuclid計量を制限して得られる$M$のRiemann計量を$g$とする．
+		\begin{enumerate-subproblems}
+			\item
+				$(M,g)$が完備でないことを3通りの方法で確かめよう．
+				\begin{enumerate-alphabet}
+					\item
+						定義域を$[0,\infty)$まで延長できないような$(M,g)$の測地線の例を挙げよ．
+					\item
+						$(M,g)$の収束しないCauchy列の例を挙げよ．
+					\item
+						$(M,g)$の有界閉集合であってコンパクトでないようなものの例を挙げよ．
+				\end{enumerate-alphabet}
+			\item
+				$p=(-1,0)$，$q=(1,0)$とおく．$(M,g)$において$d(p,q)=2$であることを示せ．
+				また$p$から$q$に達する長さ$2$の区分的に滑らかな曲線が存在しないことを示せ．
+		\end{enumerate-subproblems}
+	\item[9.2]
+		双曲平面$\mathbb{H}^2$は完備である．そのことを2通りの方法で確かめよう．
+		\begin{enumerate-subproblems}
+			\item
+				$\mathbb{H}^2$は測地完備であることを示せ．
+				［ヒント：測地線は問題7.2で記述してある．］
+			\item
+				$\mathbb{H}^2$の任意の有界閉集合はコンパクトであることを示せ．
+				［ヒント：たとえばPoincar\'e開円板モデル$B^2$を用いる．
+				双曲計量に関する有界閉集合$A$は，
+				原点$0$を中心とする双曲計量に関するある距離球$B_r^d(0)$に含まれる．
+				そこで$B_r^d(0)$が$B^2$のあるコンパクト部分集合に含まれることを確かめれば十分（なぜか？）．］
+		\end{enumerate-subproblems}
+	\item[9.3]
+		完備でないRiemann多様体であっても，
+		「任意の2点$p$，$q$に対し$p$から$q$に達する最短測地線が存在する」という性質をみたす場合はある．
+		例を挙げよ．
+	\item[9.4]\phantom{}
+		\begin{enumerate-subproblems}
+			\item\vspace{-\baselineskip}
+				Riemann多様体$(M,g)$では，
+				距離球$B^d_r(p)$の閉包は$\set{q\in M|d(p,q)\leqq r}$にいつでも等しいことを示せ．
+			\item
+				一般の距離空間$(X,d)$では，
+				開球$B^d_r(p)$の閉包は$\set{q\in X|d(p,q)\leqq r}$に等しいとは限らない．
+				そのことを示す例を挙げよ．
+		\end{enumerate-subproblems}
+\end{enumerate-problems}
+
+\end{document}

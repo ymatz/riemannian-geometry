@@ -1,0 +1,218 @@
+\RequirePackage{helvet}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{amsthm}
+\RequirePackage[initials,non-sorted-cites]{amsrefs}
+\RequirePackage[shortlabels]{enumitem}
+\RequirePackage[symbol*,perpage]{footmisc}
+\RequirePackage{mathtools}\mathtoolsset{showonlyrefs}
+\RequirePackage{tabularx}
+\RequirePackage{booktabs}
+\RequirePackage{pxrubrica}
+\RequirePackage{bxghost}
+\RequirePackage{float}
+\RequirePackage{braket}
+\RequirePackage{bm}
+\RequirePackage{pifont}
+\RequirePackage{fouridx}
+
+%\renewcommand{\headfont}{\sffamily\mgfamily\mdseries}
+\renewcommand{\emph}[1]{{\sffamily\gtfamily\bfseries#1}}
+
+% 定理環境の調整
+
+\newtheoremstyle{rmthm}% name
+	{.5\baselineskip}% Space above, empty = `usual value'
+	{.5\baselineskip}% Space below
+	{}% Body font
+	{}% Indent amount (empty = no indent, \parindent = para indent)
+	{\rmfamily\bfseries}% Thm head font
+	{．}% Punctuation after thm head
+	{0em}% Space after thm head
+	{} % Thm head spec
+
+\newtheoremstyle{rmremark}% name
+	{.5\baselineskip}% Space above, empty = `usual value'
+	{.5\baselineskip}% Space below
+	{\small}% Body font
+	{}% Indent amount (empty = no indent, \parindent = para indent)
+	{\rmfamily}% Thm head font
+	{．}% Punctuation after thm head
+	{0em}% Space after thm head
+	{} % Thm head spec
+
+\newtheoremstyle{rmexer}% name
+	{.5\baselineskip}% Space above, empty = `usual value'
+	{.5\baselineskip}% Space below
+	{\small}% Body font
+	{}% Indent amount (empty = no indent, \parindent = para indent)
+	{\rmfamily}% Thm head font
+	{．}% Punctuation after thm head
+	{0em}% Space after thm head
+	{} % Thm head spec
+
+\newtheoremstyle{rmexersol}% name
+	{.5\baselineskip}% Space above, empty = `usual value'
+	{.5\baselineskip}% Space below
+	{\small}% Body font
+	{}% Indent amount (empty = no indent, \parindent = para indent)
+	{\rmfamily}% Thm head font
+	{．}% Punctuation after thm head
+	{0em}% Space after thm head
+	{\thmnote{#3}} % Thm head spec
+
+\theoremstyle{rmthm}
+\newtheorem{thm}{定理}
+\newtheorem*{thm*}{定理}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{claim}[thm]{主張}
+\newtheorem{cor}[thm]{系}
+\newtheorem{dfn}[thm]{定義}
+\newtheorem*{dfn*}{定義}
+\newtheorem{setting}[thm]{設定}
+\theoremstyle{rmremark}
+\newtheorem{rem}[thm]{注}
+\newtheorem{ex}[thm]{例}
+\theoremstyle{rmexer}
+\newtheorem{exer}{練習}
+\newtheorem{prob}[exer]{問題}
+\theoremstyle{rmexersol}
+\newtheorem*{exersol}{}
+
+% sectionオプションの導入
+
+\makeatletter
+\def\renewtheorem#1{%
+  \expandafter\let\csname#1\endcsname\relax
+  \expandafter\let\csname c@#1\endcsname\relax
+  \gdef\renewtheorem@envname{#1}
+  \renewtheorem@secpar
+}
+\def\renewtheorem@secpar{\@ifnextchar[{\renewtheorem@numberedlike}{\renewtheorem@nonumberedlike}}
+\def\renewtheorem@numberedlike[#1]#2{\newtheorem{\renewtheorem@envname}[#1]{#2}}
+\def\renewtheorem@nonumberedlike#1{  
+\def\renewtheorem@caption{#1}
+\edef\renewtheorem@nowithin{\noexpand\newtheorem{\renewtheorem@envname}{\renewtheorem@caption}}
+\renewtheorem@thirdpar
+}
+\def\renewtheorem@thirdpar{\@ifnextchar[{\renewtheorem@within}{\renewtheorem@nowithin}}
+\def\renewtheorem@within[#1]{\renewtheorem@nowithin[#1]}
+\makeatother
+
+\DeclareOption{section}{
+	\numberwithin{equation}{section}
+	\theoremstyle{rmthm}
+	\renewtheorem{thm}{定理}[section]
+	\theoremstyle{rmexer}
+	\renewtheorem{exer}{練習}[section]
+}
+\ProcessOptions\relax
+
+% 証明環境の調整
+
+\newcommand{\myproofname}{証明}
+\makeatletter
+\renewenvironment{proof}[1][\myproofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \trivlist
+  \item[［#1］\hskip0pt]\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse\relax
+}
+\makeatother
+
+\newcommand{\mysolutionname}{解}
+\makeatletter
+\newenvironment{solution}[1][\mysolutionname]{\par
+  \pushQED{\hfill$\blacksquare$}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \trivlist
+  \item[\hskip\labelsep{\rmfamily［#1］}]\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse\relax
+}
+\makeatother
+
+% 箇条書き
+
+\newenvironment{statements}[1][(1)]{%
+	\begin{enumerate}[#1,labelsep=1.5\zw,itemindent=1\zw,listparindent=1\zw,itemsep=0\zw]
+	}{
+	\end{enumerate}
+	}
+
+\newenvironment{enumerate-statements}[1][(1)]{%
+	\begin{enumerate}[#1,labelsep=1.5\zw,itemindent=1\zw,listparindent=1\zw,itemsep=0\zw]
+	}{
+	\end{enumerate}
+	}
+
+\newenvironment{conditions}[1][(i)]{%
+	\begin{enumerate}[#1,labelsep=1.5\zw,itemindent=1\zw,listparindent=1\zw,itemsep=0\zw]
+	}{
+	\end{enumerate}
+	}
+
+\newenvironment{enumerate-conditions}[1][(i)]{%
+	\begin{enumerate}[#1,labelsep=1.5\zw,itemindent=1\zw,listparindent=1\zw,itemsep=0\zw]
+	}{
+	\end{enumerate}
+	}
+
+\newenvironment{enumerate-alphabet}[1][(a)]{%
+	\begin{enumerate}[#1,labelsep=1.5\zw,itemindent=1\zw,listparindent=1\zw,itemsep=0\zw]
+	}{
+	\end{enumerate}
+	}
+
+\newenvironment{problems}[1][1.]{%
+	\begin{enumerate}[#1,labelsep=1.5\zw,itemindent=1\zw,listparindent=1\zw,itemsep=1\zw]
+	}{
+	\end{enumerate}
+	}
+
+\newenvironment{enumerate-problems}[1][1.]{%
+	\begin{enumerate}[#1,labelsep=1.5\zw,itemindent=1\zw,listparindent=1\zw,itemsep=1\zw]
+	}{
+	\end{enumerate}
+	}
+
+\newenvironment{subproblems}[1][(1)]{%
+	\begin{enumerate}[#1,labelsep=1.5\zw,itemindent=1\zw,listparindent=1\zw,itemsep=0\zw]
+	}{
+	\end{enumerate}
+	}
+
+\newenvironment{enumerate-subproblems}[1][(1)]{%
+	\begin{enumerate}[#1,labelsep=1.5\zw,itemindent=1\zw,listparindent=1\zw,itemsep=0\zw]
+	}{
+	\end{enumerate}
+	}
+
+% 注
+
+\newenvironment{notes}{%
+	\begin{list}{\ding{226}}{
+		\setlength{\itemindent}{1zw}
+		\setlength{\labelsep}{1.5zw}
+		\setlength{\listparindent}{1zw}
+		\setlength{\leftmargin}{2zw}
+		\setlength{\itemsep}{0.5zw}
+		\setlength{\topsep}{0.5zw}
+		\small
+		}
+	}{
+	\end{list}
+	}
+
+% 引用テキスト
+
+\newenvironment{framedquote}{%
+	\begin{tcolorbox}%
+}{%
+	\end{tcolorbox}%
+	\vspace{-.5zw}%
+	\noindent\ignorespacesafterend%
+}

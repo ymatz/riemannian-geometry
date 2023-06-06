@@ -1,0 +1,83 @@
+%! TeX program = upLaTeX
+\RequirePackage{plautopatch}
+\documentclass[uplatex,dvipdfmx,fontsize=12pt,jafontsize=11pt,line_length=42zw,number_of_lines=36,hanging_punctuation]{jlreq}
+\usepackage{jlreq-deluxe}
+\usepackage{libertinus}
+\usepackage[T1]{fontenc}
+\usepackage{libertinust1math}
+\usepackage{eucal}
+\usepackage{mathnotes-jlreq}
+\usepackage{tensor}
+
+\pagestyle{empty}
+
+\jlreqsetup{
+	itemization_label_length = 2.5zw,
+	itemization_labelsep = .5zw,
+}
+\setlength{\leftmargini}{3\zw}
+
+\newcommand{\bdry}{\partial}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\compose}{\mathbin{\circ}}
+\DeclareMathOperator{\Ric}{Ric}
+\DeclareMathOperator{\id}{id}
+
+\begin{document}
+
+\begin{flushleft}
+	幾何学4\,／\,微分幾何学概論I（松本）
+	\hfill
+	2022年12月26日
+\end{flushleft}
+\setcounter{section}{10}
+\section{曲線のエネルギーとその変分}
+
+\begin{enumerate-problems}
+	\item[11.1]
+		$M$を完備Riemann多様体とし，$N$を$M$の閉部分多様体とする．
+		$p$を$N$上にない$M$の点とする．
+		$d(p,N)=\inf_{q'\in N}d(p,q')$とおく．
+		\begin{enumerate-subproblems}
+			\item
+				$d(p,q)=d(p,N)$をみたす$q\in N$が存在することを示せ．
+				［ヒント：Hopf--Rinowの定理により有界閉集合はコンパクト．］
+			\item
+				(1)のような$q$に対して$p$と$q$を結ぶ最短測地線$\gamma$を任意に一つとる．
+				$\gamma$が$N$に直交することを示せ．
+				［ヒント：曲線$\gamma$の最短性を直接利用してもよいが，ここではエネルギーを使う方針を示す．
+				直交しないとする．
+				そのとき始点$p$を固定する$\gamma$の変分$(\gamma_s)$で，変分ベクトル場$V$が
+				$\braket{V(b),\dot{\gamma}(b)}<0$をみたすようなものをとれる．
+				ある$s=s_0$が存在して$E(\gamma_{s_0})<E(\gamma)$であることを示し，
+				$\gamma$が最短測地線であることと合わせて矛盾を導け．］
+		\end{enumerate-subproblems}
+	\item[11.2]\phantom{}
+		\begin{enumerate-subproblems}
+			\item\vspace{-\baselineskip}
+				$V$を向きづけられた奇数次元実計量ベクトル空間とする．
+				向きを保つ任意の直交変換$\varphi\colon V\to V$に対し，
+				$\varphi(v)=v$をみたす$0$でないベクトル$v\in V$が存在することを示せ．
+			\item
+				$(M,g)$を向きづけられた偶数次元Riemann多様体とし，
+				断面曲率が正である\footnote{各点$p\in M$における
+				すべての2次元部分空間$\sigma\subset T_pM$に対し$K(\sigma)>0$であるという意味．}とする．
+				任意の閉測地線$\gamma$に対し，$\gamma$がそれよりも短い閉曲線に
+				ホモトピックであることを示せ\footnote{（なめらかな）閉曲線$\gamma\colon[a,b]\to M$とは，
+				始点$\gamma(a)$と終点$\gamma(b)$が一致していて，
+				しかも$t\in\mathbb{R}$に対して
+				\begin{equation}
+					\tilde{\gamma}(t)=\gamma(t-k(b-a)),
+					\qquad\text{ただし$t\in\mathbb{Z}$は$t-k(b-a)\in[a,b]$となるように選ぶ}
+				\end{equation}
+				と定めたとき$\tilde{\gamma}\colon\mathbb{R}\to M$がなめらかな曲線であるようなもの．
+				円周$S^1$からの$C^\infty$級写像のことだといってもよい．
+				さらに上記の$\tilde{\gamma}$が測地線であるとき，閉曲線$\gamma$は（閉）測地線であるという．}．
+				［ヒント：仮定と(1)により，閉測地線$\gamma$に沿って非自明な平行ベクトル場$V=V(t)$をとることができる．
+				$V$を変分ベクトル場とする$\gamma$の変分$(\gamma_s)$をとる
+				（ただし各$\gamma_s$も閉曲線とする）．
+				エネルギー$E(s)=E(\gamma_s)$について$E'(0)=0$，$E''(0)<0$を示し，利用せよ．］
+		\end{enumerate-subproblems}
+\end{enumerate-problems}
+
+\end{document}

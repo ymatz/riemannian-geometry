@@ -1,0 +1,85 @@
+%! TeX program = upLaTeX
+\RequirePackage{plautopatch}
+\documentclass[uplatex,dvipdfmx,fontsize=12pt,jafontsize=11pt,line_length=42zw,number_of_lines=36,hanging_punctuation]{jlreq}
+\usepackage{jlreq-deluxe}
+\usepackage{libertinus}
+\usepackage[T1]{fontenc}
+\usepackage{libertinust1math}
+\usepackage{eucal}
+\usepackage{mathnotes-jlreq}
+\usepackage{tensor}
+
+\pagestyle{empty}
+
+\jlreqsetup{
+	itemization_label_length = 2.5zw,
+	itemization_labelsep = .5zw,
+}
+\setlength{\leftmargini}{3\zw}
+
+\newcommand{\bdry}{\partial}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\compose}{\mathbin{\circ}}
+\DeclareMathOperator{\Ric}{Ric}
+\DeclareMathOperator{\id}{id}
+
+\begin{document}
+
+\begin{flushleft}
+	幾何学4\,／\,微分幾何学概論I（松本）
+	\hfill
+	2023年1月23日
+\end{flushleft}
+\setcounter{section}{12}
+\section{Bonnet--Myersの定理}
+
+\begin{enumerate-problems}
+	\item[13.1]
+		測地線$\gamma\colon[a,b]\to M$について，
+		$\gamma$に沿って定義された区分的$C^\infty$級ベクトル場$V$，$W$に対しindex form
+		\begin{equation}
+			I(V,W)=\int_a^b(\braket{\dot{V},\dot{W}}+\braket{R(\dot{\gamma},V)\dot{\gamma},W})dt
+		\end{equation}
+		を考える（$\dot{V}$は$\nabla_{\dot{\gamma}}V$を表す）．
+		$V$がJacobi場$J$であるとき
+		\begin{equation}
+			I(J,W)=\braket{\dot{J}(b),W(b)}-\braket{\dot{J}(a),W(a)}
+		\end{equation}
+		であることを確かめよ．
+	\item[13.2]
+		Rauchの比較定理を経由しないBonnetの定理の証明を与えよう．
+		完備Riemann多様体$(M,g)$の断面曲率が$K(\sigma)\geqq\delta>0$をみたすとする．
+		Hopf--Rinowの定理により，速さ$1$の測地線$\gamma\colon[0,T]\to M$は$T>\pi/\sqrt{\delta}$のとき
+		最短測地線ではありえないことを証明すればよい．
+		そのためには，$\gamma$に沿って定義された$V(0)=V(T)=0$をみたす区分的$C^\infty$級ベクトル場$V$であって，
+		$I(V,V)<0$をみたすものが存在することを示せば十分である．
+
+		$e$を$\gamma$に沿った長さ$1$の任意の平行法ベクトル場として
+		\begin{equation}
+			V(t)=\left(\sin\frac{\pi t}{T}\right)e(t)
+		\end{equation}
+		とおく．
+		\begin{subproblems}
+			\item
+				$\displaystyle I(V,V)=\int_0^T\left(\sin^2\frac{\pi t}{T}\right)
+				\left(\frac{\pi^2}{T^2}-\braket{R(e,\dot{\gamma})\dot{\gamma},e}\right)dt$を示せ．
+			\item
+				$I(V,V)<0$であることを結論せよ．よってBonnetの定理が従う．
+		\end{subproblems}
+	\item[13.3]
+		前問の証明を改良してMyersの定理を示そう．
+		$n$次元完備Riemann多様体$(M,g)$のRicciテンソルが$\Ric\geqq(n-1)\delta>0$をみたすとする．
+		前問と同様に，速さ$1$の測地線$\gamma\colon[0,T]\to M$で$T>\pi/\sqrt{\delta}$なるものに対し，
+		$\gamma$に沿って定義された$V(0)=V(T)=0$をみたす区分的$C^\infty$級ベクトル場$V$であって，
+		$I(V,V)<0$をみたすものが存在することを示せば十分である．
+
+		$e_1$，$e_2$，……，$e_{n-1}$を$\gamma$に沿った互いに直交する長さ$1$の平行法ベクトル場とし
+		\begin{equation}
+			V_i(t)=\left(\sin\frac{\pi t}{T}\right)e_i(t)
+		\end{equation}
+		とおく．
+		$\displaystyle\sum_{i=1}^{n-1}I(V_i,V_i)<0$を示せ．
+		よって$I(V_i,V_i)<0$をみたす$i$が少なくとも一つ存在するから，Myersの定理が従う．
+\end{enumerate-problems}
+
+\end{document}

@@ -1,0 +1,163 @@
+%! TeX program = upLaTeX
+\RequirePackage{plautopatch}
+\documentclass[uplatex,dvipdfmx,fontsize=12pt,jafontsize=11pt,line_length=42zw,number_of_lines=36,hanging_punctuation]{jlreq}
+\usepackage{jlreq-deluxe}
+\usepackage{libertinus}
+\usepackage[T1]{fontenc}
+\usepackage{libertinust1math}
+\usepackage{eucal}
+\usepackage{mathnotes-jlreq}
+\usepackage{tensor}
+
+\pagestyle{empty}
+
+\jlreqsetup{
+	itemization_label_length = 2.5zw,
+	itemization_labelsep = .5zw,
+}
+\setlength{\leftmargini}{3\zw}
+
+\newcommand{\bdry}{\partial}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\compose}{\mathbin{\circ}}
+\DeclareMathOperator{\sgn}{sgn}
+
+\begin{document}
+
+\begin{flushleft}
+	幾何学4\,／\,微分幾何学概論I（松本）
+	\hfill
+	2022年10月31日（2023年3月5日改訂）
+\end{flushleft}
+\setcounter{section}{3}
+\section{テンソルの共変微分}
+
+今回の問題を通じて，接束$TM$には接続$\nabla$が与えられているものとする．
+（とくに断らないかぎり，Levi-Civita接続とは仮定しない．）
+
+\begin{problems}
+	\item[4.1]
+		$(\nabla_X\alpha)(Y)=X(\alpha(Y))-\alpha(\nabla_XY)$
+		を余接束$T^*M$の接続$\nabla$の定義式とみなす．
+		この$\nabla$が接続のみたすべき条件を実際に満足することを確かめよ．
+	\item[4.2$^\star$]
+		$(0,2)$テンソル$T$に対しては
+		$\tensor{(\nabla_XT)}{_i_j}=X(\tensor{T}{_i_j})
+		-\tensor{X}{^p}\tensor{\Gamma}{^k_p_i}\tensor{T}{_k_j}
+		-\tensor{X}{^p}\tensor{\Gamma}{^k_p_j}\tensor{T}{_i_k}$
+		である．
+		これを用いて，双曲平面$\mathbb{H}^2$のLevi-Civita接続$\nabla$について，
+		任意のベクトル場$X$に対し$\nabla_Xg=0$であることを直接確かめよ．
+		［ヒント：つまり$\tensor{(\nabla_Xg)}{_i_j}=0$がすべての$i$，$j$について成立することを
+		確かめればいいのである．上半平面モデルを使うのが簡単だろう．］
+	\item[4.3]
+		Riemann多様体$(M,g)$においてLevi-Civita接続$\nabla$を考える．
+		\begin{subproblems}
+			\item[(1)]
+				ベクトル場$X$に対し$\alpha(Y)=g(X,Y)$で定義される1次微分形式$\alpha$を$X^\flat$で表す．
+				また，1次微分形式$\alpha$に対し$g(X,Y)=\alpha(Y)$で定義されるベクトル場$X$を$\alpha^\sharp$で表す
+				\footnote{$X^\flat$，$\alpha^\sharp$はしばしば$X$，$\alpha$の\emph{metric dual}とよばれる．
+				$\flat$，$\sharp$は音楽記号のフラット（半音下げる），シャープ（半音上げる）．
+				$X^\flat$の定義式は局所表示を用いて書けば$(X^\flat)_iY^i=\tensor{g}{_i_j}X^iY^j$だが，
+				すると$(X^\flat)_j=\tensor{g}{_i_j}X^i$であって，
+				つまり$X^\flat$は
+				「$X^i$の添字を$\tensor{g}{_i_j}$との縮約により下げたもの」なので$\flat$を使う．
+				同様に$\alpha^\sharp$は
+				「$\alpha_i$の添字を$\tensor{g}{^i^j}$との縮約により上げたもの」なので$\sharp$を使う．
+				なお，「$X^\flat$は要するに$X$と同じものだ」
+				「$\alpha^\sharp$は要するに$\alpha$と同じものだ」という気持ちで，
+				$(X^\flat)_j$，$(\alpha^\sharp)^j$を単に$X_j$，$\alpha^j$と書くこともある．}．
+				$(\nabla_ZX)^\flat=\nabla_ZX^\flat$，$(\nabla_Z\alpha)^\sharp=\nabla_Z\alpha^\sharp$を示せ．
+			\item[(2)]
+				1次微分形式$\alpha$，$\beta$に対し，
+				$\tilde{g}(\alpha,\beta)=g(\alpha^\sharp,\beta^\sharp)$によって
+				$(2,0)$型テンソル$\tilde{g}$を定める\footnote{ただし$(2,0)$型テンソル$T$に対する
+				$T(\alpha,\beta)$とは，各チャートで
+				$T=\tensor{T}{^i^j}\frac{\partial}{\partial x^i}\otimes\frac{\partial}{\partial x^j}$と
+				書いたときの
+				$\tensor{T}{^i^j}\alpha\left(\frac{\partial}{\partial x^i}\right)
+				\beta\left(\frac{\partial}{\partial x^j}\right)$
+				のこと．$\tensor{T}{^i^j}\alpha_i\beta_j$と書くこともできる．
+				これはまた$T\otimes\alpha\otimes\beta$を2回縮約したものともいえる．
+				したがって
+				$X(T(\alpha,\beta))=(\nabla_XT)(\alpha,\beta)+T(\nabla_X\alpha,\beta)+T(\alpha,\nabla_X\beta)$
+				が成立する．}（この$\tilde{g}$を$g$から$T^*M$に誘導される計量という）．
+				$\nabla_X\tilde{g}=0$を示せ．
+			\item[(3)]
+				$\tilde{g}$の局所表示$\tensor{\tilde{g}}{^i^j}$は
+				$\tensor{g}{_i_j}$の逆行列$\tensor{g}{^i^j}$に他ならない．
+				そのことを示せ．
+		\end{subproblems}
+	\item[4.4]
+		$(0,k)$テンソル$T$が\emph{対称}であるとは，
+		任意のベクトル場$X_1$，……，$X_k$および
+		$\set{1,\dots,k}$の任意の置換$\sigma\in\mathfrak{S}_k$に対し
+		$T(X_{\sigma(1)},\dots,X_{\sigma(k)})=T(X_1,\dots,X_k)$であることをいう．
+		また$T$が\emph{歪対称}であるとは，
+		$T(X_{\sigma(1)},\dots,X_{\sigma(k)})=\sgn(\sigma)\cdot T(X_1,\dots,X_k)$
+		であることをいう（$\sgn(\sigma)=\pm 1$は置換$\sigma$の符号）\footnote{局所表示を用いていうと，
+		$T$の対称性，歪対称性はそれぞれ，各チャート上で$T$の局所表示$\tensor{T}{_{i_1}_{\cdots}_{i_k}}$が
+		$i_1\cdots i_k$に関して対称，歪対称であることと同値．}．
+		$T$が対称ならば$\nabla_XT$も対称であることを示せ．
+		また$T$が歪対称ならば$\nabla_XT$も歪対称であることを示せ．
+	\item[4.5]
+		$k$次微分形式とは歪対称$(0,k)$テンソルのことである．
+		$dx^{i_1}\wedge\dots\wedge dx^{i_k}$とは
+		\begin{equation}
+			\sum_{\sigma\in\mathfrak{S}_k}\sgn(\sigma)\cdot dx^{i_{\sigma(1)}}\otimes\dots\otimes dx^{i_{\sigma(k)}}
+		\end{equation}
+		のことだと解釈
+		する\footnote{この流儀のほかに，$\displaystyle\frac{1}{k!}\sum_{\sigma\in\mathfrak{S}_k}
+		\sgn(\sigma)\cdot dx^{i_{\sigma(1)}}\otimes\dots\otimes dx^{i_{\sigma(k)}}$のことだと解釈する流儀もある．
+		2つの流儀を「$k$個のベクトルが張る平行$2k$面体の体積を考えるか，$k$単体の体積を考えるかの違いだ」と
+		説明することもある．
+		微分形式の外積の計算や外微分の計算だけをしているかぎりは両者の流儀に差はなく，
+		ベクトル（場）を代入した値を問題にするときのみ差が出てくる．
+		（ちなみに微分形式の内積（ないしノルム）には困ったことに3通りの流儀がある．）}．
+		$\nabla$がtorsion-freeな$TM$の接続であるとき，$k$次微分形式$\alpha$に対し
+		\begin{equation}
+			(d\alpha)(X_1,\dots,X_{k+1})
+			=\sum_{i=1}^{k+1}(-1)^{i-1}(\nabla_{X_i}\alpha)(X_1,\dots,\check{X}_i,\dots,X_{k+1})
+		\end{equation}
+		であることを示せ（ただし$\check{\phantom{X}}$はそれを取り除くことを表す\footnote{世の中では$\hat{\phantom{X}}$を
+		見かけることのほうが圧倒的に多い気がするが，
+		松本は刷り込みによって$\check{\phantom{X}}$を好むようになってしまった（どこで初めて見たのかは不明）．
+		$\check{\phantom{X}}$のほうが「取り除いている」感じがしませんか？}．
+		なお$k=0$のときはこれは$df(X)=\nabla_Xf$という式だと解釈する）．
+		$k=1$，$2$について示すだけでもよい\footnote{$k=1$や$k=2$の場合について
+		すぐに手を動かして計算できることは有意義である．
+		各種の公式について「細部に現れる符号や係数がわからなくなったので確認したい」といったとき，
+		そんな計算をたくさん行うことになる．}．
+
+		［ヒント：たとえば
+		\begin{multline}
+			(d\alpha)(X_1,\dots,X_{k+1})
+			=\sum_{i}(-1)^{i-1}X_i(\alpha(X_1,\dots,\check{X}_i,\dots,X_{k+1})) \\
+			+\sum_{i<j}(-1)^{i+j}\alpha([X_i,X_j],X_1,\dots,\check{X}_i,\dots,\check{X}_j,\dots,X_{k+1})
+		\end{multline}
+		という式を
+		知っていれば\footnote{ここでも$d\alpha(X,Y)=X(\alpha(Y))-Y(\alpha(X))-\alpha([X,Y])$とか
+		$d\alpha(X,Y,Z)=X(\alpha(Y,Z))+Y(\alpha(Z,X))+Z(\alpha(X,Y))
+		-\alpha([X,Y],Z)-\alpha([Y,Z],X)-\alpha([Z,X],Y)$といった式をすぐ書けることが重要．}使える．
+		あるいは，各チャート$(U;x^1,\dots,x^n)$において
+		\begin{equation}
+			\begin{split}
+				\alpha
+				&=\tensor{\alpha}{_{i_1}_{\cdots}_{i_k}}dx^{i_1}\otimes\dots\otimes dx^{i_k}
+				=\frac{1}{k!}\tensor{\alpha}{_{i_1}_{\cdots}_{i_k}}dx^{i_1}\wedge\dots\wedge dx^{i_k}\\
+				&=\sum_{i_1<\dots<i_k}\tensor{\alpha}{_{i_1}_{\cdots}_{i_k}}dx^{i_1}\wedge\dots\wedge dx^{i_k}
+			\end{split}
+		\end{equation}
+		と書いておいて$U$で計算をしてもよい．
+		$\alpha(\partial/\partial x^{i_1},\dots,\partial/\partial x^{i_k})=\tensor{\alpha}{_{i_1}_{\cdots}_{i_k}}$
+		に注意すれば，証明すべきことは
+		\begin{equation}
+			\tensor{(d\alpha)}{_{i_1}_{\cdots}_{i_{k+1}}}
+			=\sum_{j=1}^{k+1}(-1)^{j-1}
+			\tensor{(\nabla_{\frac{\partial}{\partial x^{i_j}}}\alpha)}{_{i_1}_{\cdots}_{\check{i}_j}_{\cdots}_{i_{k+1}}}
+		\end{equation}
+		である（歪対称なので$i_1<\dots<i_{k+1}$の場合についてのみ示せば十分）．
+		$\nabla$がtorsion-freeなので接続係数が$\tensor{\Gamma}{^k_i_j}=\tensor{\Gamma}{^k_j_i}$をみたすことを用いる．］
+\end{problems}
+
+\end{document}

@@ -1,0 +1,95 @@
+%! TeX program = upLaTeX
+\RequirePackage{plautopatch}
+\documentclass[uplatex,dvipdfmx,fontsize=12pt,jafontsize=11pt,line_length=42zw,number_of_lines=36,hanging_punctuation]{jlreq}
+\usepackage{jlreq-deluxe}
+\usepackage{libertinus}
+\usepackage[T1]{fontenc}
+\usepackage{libertinust1math}
+\usepackage{eucal}
+\usepackage{mathnotes-jlreq}
+\usepackage{tensor}
+
+\pagestyle{empty}
+
+\jlreqsetup{
+	itemization_label_length = 2.5zw,
+	itemization_labelsep = .5zw,
+}
+\setlength{\leftmargini}{3\zw}
+
+\newcommand{\bdry}{\partial}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\compose}{\mathbin{\circ}}
+\DeclareMathOperator{\Ric}{Ric}
+\DeclareMathOperator{\id}{id}
+
+\begin{document}
+
+\begin{flushleft}
+	幾何学4\,／\,微分幾何学概論I（松本）
+	\hfill
+	2022年12月19日
+\end{flushleft}
+\setcounter{section}{9}
+\section{Jacobi場}
+
+\begin{enumerate-problems}
+	\item[10.1]
+		$F\colon I_1\times I_2\to M$を区間の直積$I_1\times I_2$からRiemann多様体への$C^\infty$級写像とし，
+		曲線$\gamma_s\colon I_2\to M$を$\gamma_s(t)=F(s,t)$で，
+		曲線$\omega_t\colon I_1\to M$を$\omega_t(s)=F(s,t)$で定義する．
+		また各$(s,t)\in I_1\times I_2$に対し$V(s,t)\in T_{F(s,t)}M$が与えられており，
+		$(s,t)$に関して$C^\infty$級であると
+		する\footnote{$V$が接束$TM$への写像$I_1\times I_2\to TM$として$C^\infty$級ということ．
+		$V(s,t)$を局所座標系を用いて表示したときの各成分が$(s,t)$に関して$C^\infty$級ということだと
+		いってもよい．}．
+		$\nabla_{\dot{\omega}_t}\nabla_{\dot{\gamma}_s}V-\nabla_{\dot{\gamma}_s}\nabla_{\dot{\omega}_t}V
+		=R(\dot{\omega}_t,\dot{\gamma}_s)V$
+		を示せ．［ヒント：局所座標系を用いて計算．］
+	\item[10.2]
+		測地線$\gamma\colon I\to M$に沿って定義されたJacobi場$J=J(t)$について，ある$t_0\in I$に対し
+		$J(t_0)\perp\dot{\gamma}(0)$，$\dot{J}(t_0)\perp\dot{\gamma}(0)$ならば
+		任意の$t\in I$に対し$J(t)\perp\dot{\gamma}(t)$であることを示せ．
+		［ヒント：内積$\braket{J(t),\dot{\gamma}(t)}$を$t$に関して2回微分する．］
+	\item[10.3]
+		双曲平面$\mathbb{H}^2$におけるJacobi場の例を，
+		測地線の1パラメタ族をもとに構成してみよう．
+		上半平面モデル$H^2=\set{(x,y)\in\mathbb{R}^2|y>0}$を用いる．
+		\begin{enumerate-subproblems}
+			\item
+				任意の実数$s$に対し，
+				\begin{equation}
+					\gamma_s(t)=\left(\frac{s(e^{2t}-1)}{1+s^2e^{2t}},\frac{(1+s^2)e^t}{1+s^2e^{2t}}\right)
+				\end{equation}
+				で与えられる$H^2$の曲線$\gamma_s$が測地線であることを確かめよ．
+			\item
+				$\gamma=\gamma_0$に沿ったJacobi場
+				$J(t)=\left.\dfrac{\partial \gamma_s(t)}{\partial s}\right|_{s=0}$を考える．
+				また，点$\gamma(0)=(0,1)$における接ベクトル$(1,0)\in T_{(0,1)}H^2$を平行移動して得られる
+				$\gamma$に沿った単位平行ベクトル場を$e_2=e_2(t)$とする．
+				$J(t)=(\sinh t)e_2(t)$を示せ．
+			\item
+				$J(t)$がJacobi方程式をみたすことを確かめよ．
+		\end{enumerate-subproblems}
+	\item[10.4]
+		測地線$\gamma\colon[a,b]\to M$に沿って$\gamma(a)$と$\gamma(b)$が共役ではないと仮定する．
+		そのとき，任意に与えられた$v\in T_{\gamma(a)}M$，$w\in T_{\gamma(b)}M$に対して，
+		$J(a)=v$，$J(b)=w$をみたす$\gamma$に沿ったJacobi場$J(t)$がただ一つ存在することを示せ．
+		［ヒント：$v=0$として証明すれば十分である（なぜか？）．
+		$J(a)=0$をみたすすべてのJacobi場がなすベクトル空間を$\mathcal{J}_0$とする．
+		$J\mapsto J(b)$で定義される$\mathcal{J}_0$から$T_{\gamma(b)}M$への線型写像を考えよ．］
+	\item[10.5]
+		Riemann多様体$(M,g)$の\emph{Killingベクトル場}とは，
+		その任意の局所フロー$\varphi_t\colon U\to M$（$U$は開集合，$-\varepsilon<t<\varepsilon$）が
+		$\varphi_t^*g=g|_U$をみたすようなもののことである．
+		\begin{enumerate-subproblems}
+			\item
+				Killingベクトル場を測地線$\gamma$に制限したものはJacobi場であることを示せ．
+			\item
+				連結なRiemann多様体$(M,g)$では，Killingベクトル場$X$がある点$p\in M$において
+				$X(p)=0$かつ$\nabla_v X=0$（$v\in T_pM$は任意）をみたすならば，
+				$M$全体で$X=0$であることを示せ．
+		\end{enumerate-subproblems}
+\end{enumerate-problems}
+
+\end{document}

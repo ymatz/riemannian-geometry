@@ -1,0 +1,92 @@
+%! TeX program = upLaTeX
+\RequirePackage{plautopatch}
+\documentclass[uplatex,dvipdfmx,fontsize=12pt,jafontsize=11pt,line_length=42zw,number_of_lines=36,hanging_punctuation]{jlreq}
+\usepackage{jlreq-deluxe}
+\usepackage{libertinus}
+\usepackage[T1]{fontenc}
+\usepackage{libertinust1math}
+\usepackage{eucal}
+\usepackage{mathnotes-jlreq}
+
+\pagestyle{empty}
+
+\jlreqsetup{
+	itemization_label_length = 2.5zw,
+	itemization_labelsep = .5zw,
+}
+\setlength{\leftmargini}{3\zw}
+
+\newcommand{\bdry}{\partial}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\End}{End}
+
+\begin{document}
+
+\begin{flushleft}
+	幾何学4\,／\,微分幾何学概論I（松本）
+	\hfill
+	2022年10月3日（2023年3月31日改訂）
+\end{flushleft}
+\section{多様体の復習，ベクトル束}
+
+\begin{problems}
+	\item[1.1]
+		2次元球面$S^2=\set{(x,y,z)\in\mathbb{R}^3|x^2+y^2+z^2=1}$を考える．
+		点$(0,0,\pm 1)$を$p_\pm$と書く．
+		$S^2\setminus\set{p_+,p_-}$の点は
+		$\theta\in(-\pi/2,\pi/2)$と$\mathbb{R}^2$の単位ベクトル$(s,t)$を用いて
+		$(s\cos\theta,t\cos\theta,\sin\theta)$と一意的に表せることに注意せよ．
+		2点$p_\pm$に対しては$(s,t)$が一意的でなくてもよいことにすれば，
+		$S^2$の任意の点が$\theta\in[-\pi/2,\pi/2]$と$\mathbb{R}^2$の単位ベクトル$(s,t)$を用いて
+		$(s\cos\theta,t\cos\theta,\sin\theta)$と表される．
+
+		$U=S^2\setminus\set{p_-}$，$V=S^2\setminus\set{p_+}$とおき，
+		$\mathbb{R}^2$の原点を中心とする半径$\pi$の開球を$B_\pi$と書いて，
+		写像$\varphi\colon U\to B_\pi$および$\psi\colon V\to B_\pi$を
+		\begin{equation}
+			\varphi(s\cos\theta,t\cos\theta,\sin\theta)=\left(\frac{\pi}{2}-\theta\right)(s,t),\qquad
+			\psi(s\cos\theta,t\cos\theta,\sin\theta)=\left(\frac{\pi}{2}+\theta\right)(s,t)
+		\end{equation}
+		と定義する（右辺では$(s,t)$をベクトルとみて定数倍している）．
+
+		$(U,\varphi)$と$(V,\psi)$はいずれも$S^2$の通常の$C^\infty$級微分構造の許容するチャートであることを確かめよ．
+		（したがって$\set{(U,\varphi),(V,\psi)}$は$S^2$の通常の$C^\infty$級微分構造を与えるアトラスの一つ．
+		いわば正距方位図法によるアトラスである．容易に高次元化できることにも注意せよ．）
+
+		［ヒント：ステレオグラフィック射影により得られるチャートと比較する．
+		\begin{equation}
+			(u,v)\mapsto\tan\frac{\sqrt{u^2+v^2}}{2}\cdot
+			\left(\frac{u}{\sqrt{u^2+v^2}},\frac{v}{\sqrt{u^2+v^2}}\right)
+		\end{equation}
+		が$B_\pi$から$\mathbb{R}^2$への$C^\infty$級微分同相写像になっていることを確かめればよいことがわかる．
+		$r^{-1}\tan(r/2)$を$r^2$の関数とみると$r^2=0$の近傍において$C^\infty$級であることを示し，利用する．］
+		\clearpage
+	\item[1.2$^\star$]
+		$E$を多様体$M$上のベクトル束とし，そのランクを$r$とする．
+		ベクトル束の定義により，任意の点$p\in M$に対し，
+		そのある開近傍$U$において局所自明化
+		$\Phi\colon \pi^{-1}(U)\cong U\times\mathbb{R}^r$が存在する．
+		$\Phi$はファイバー$E_q$（ただし$q\in U$）を$\set{q}\times\mathbb{R}^r$にうつす．
+		$e_\alpha$（$\alpha=1$，$2$，……，$r$）を$\mathbb{R}^r$の標準基底とし，
+		$\xi_\alpha(q)=\Phi^{-1}(q,e_\alpha)$によって$\xi_\alpha$を定めると，
+		各$\xi_\alpha$はベクトル束$E$の$U$上における切断である．
+
+		一般に，開集合$U$上における$E$の$r$個の切断$\xi_1$，$\xi_2$，……，$\xi_r$は，
+		各点$q\in U$において$\xi_1(q)$，$\xi_2(q)$，……，$\xi_r(q)$がファイバー$E_q$の基底になっているとき，
+		$E$の$U$上における\emph{局所枠}（local frame）とよばれる．
+		前段落の記述は，$E$の局所自明化$\Phi$から自然に定まるような局所枠があるということをいっている．
+
+		逆に開集合$U$上における局所枠$\xi_1$，$\xi_2$，……，$\xi_r$が与えられたとする．
+		そのとき$q\in U$に対し
+		$E_q$の任意のベクトル$v$は$v=\sum_{\alpha=1}^ra^\alpha\xi_\alpha(q)$と一意的に表されるから，
+		\begin{equation}
+			\Phi\left(\sum_{\alpha=1}^ra^\alpha\xi_\alpha(q)\right)=(q,(a^\alpha))
+		\end{equation}
+		と定めることによって写像$\Phi\colon\pi^{-1}(U)\to U\times\mathbb{R}^r$を定義できる．
+		この$\Phi$がベクトル束$E$の$U$における局所自明化を与えていることを証明せよ．
+
+		（要するに局所自明化を与えることと局所枠を与えることは等価だと言いたいのである．）
+\end{problems}
+
+\end{document}
