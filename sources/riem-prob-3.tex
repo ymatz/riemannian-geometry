@@ -1,0 +1,176 @@
+%! TeX program = upLaTeX
+\RequirePackage{plautopatch}
+\documentclass[uplatex,dvipdfmx,fontsize=12pt,jafontsize=11pt,line_length=42zw,number_of_lines=36,hanging_punctuation]{jlreq}
+\usepackage{jlreq-deluxe}
+\usepackage{libertinus}
+\usepackage[T1]{fontenc}
+\usepackage{libertinust1math}
+\usepackage{eucal}
+\usepackage{mathnotes-jlreq}
+\usepackage{tensor}
+
+\pagestyle{empty}
+
+\jlreqsetup{
+	itemization_label_length = 2.5zw,
+	itemization_labelsep = .5zw,
+}
+\setlength{\leftmargini}{3\zw}
+
+\newcommand{\bdry}{\partial}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\compose}{\mathbin{\circ}}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\supp}{supp}
+
+\begin{document}
+
+\begin{flushleft}
+	幾何学4\,／\,微分幾何学概論I（松本）
+	\hfill
+	2022年10月24日（2023年3月5日改訂）
+\end{flushleft}
+\setcounter{section}{2}
+\section{Levi-Civita接続}
+
+\begin{problems}
+	\item[3.1]
+		$\mathbb{R}^2$のEuclid計量$g$を考える．
+		$\mathbb{R}^2$から原点を端点とする任意の半直線を除いて得られる開集合を$U$とすると，
+		$U$における極座標系$(r,\theta)$に関して
+		Christoffel記号$\tensor{\Gamma}{^k_i_j}$が
+		\begin{equation}
+			\tensor{\Gamma}{^1_1_1}
+			=\tensor{\Gamma}{^2_1_1}
+			=\tensor{\Gamma}{^1_1_2}
+			=\tensor{\Gamma}{^1_2_1}
+			=\tensor{\Gamma}{^2_2_2}=0,\qquad
+			\tensor{\Gamma}{^2_1_2}
+			=\tensor{\Gamma}{^2_2_1}=\frac{1}{r},\qquad
+			\tensor{\Gamma}{^1_2_2}=-r
+		\end{equation}
+		で与えられることを示せ（$r$，$\theta$に対応する添字を順に$1$，$2$とした）．
+		［ヒント：$\tensor{g}{^1^1}=1$，$\tensor{g}{^2^2}=1/r^2$，$\tensor{g}{^1^2}=\tensor{g}{^2^1}=0$．］
+	\item[3.2$^\star$]\phantom{}
+		\begin{subproblems}\vspace{-\baselineskip}
+			\item
+				Riemann計量$g$が
+				ある局所座標系$(x^1,\dots,x^n)$に関して
+				$\tensor{g}{_i_j}=e^{2f}\tensor{\delta}{_i_j}$（$f$は実数値$C^\infty$級関数）
+				と表されるとする\footnote{共形平坦（conformally flat）であるという．}．
+				そのときChristoffel記号$\tensor{\Gamma}{^k_i_j}$が
+				\begin{equation}
+					\tensor{\Gamma}{^k_i_j}
+					=\frac{\partial f}{\partial x^i}\tensor{\delta}{_j^k}
+					+\frac{\partial f}{\partial x^j}\tensor{\delta}{_i^k}
+					-\frac{\partial f}{\partial x^l}\tensor{\delta}{^k^l}\tensor{\delta}{_i_j}
+				\end{equation}
+				で与えられることを示せ\footnote{ただし$\delta$はKroneckerのデルタ．
+				添字が両方とも上（または下）にあったり上下に分かれていたりするが，
+				添字の位置によらず「添字の値が一致するときは1，そうでないときは0」を表す記号である
+				（それにもかかわらず上下を気にして書き分けているのは，添字を「正しい」位置に置き，
+				Einsteinの規約が正しく働くようにするため）．}．
+			\item
+				双曲平面$\mathbb{H}^2$をPoincar\'eモデルにより
+				$B^2=\set{(x,y)\in\mathbb{R}^2|x^2+y^2<1}$とみなす．
+				座標系$(x,y)$に関するChristoffel記号$\tensor{\Gamma}{^k_i_j}$を求めよ．
+			\item
+				$\mathbb{H}^2$を上半空間モデルにより
+				$H^2=\set{(x,y)\in\mathbb{R}^2|y>0}$とみなす．
+				座標系$(x,y)$に関するChristoffel記号$\tensor{\Gamma}{^k_i_j}$を求めよ．
+			\item
+				$\mathbb{H}^2$を上半空間モデルにより$H^2$とみなす．
+				ベクトル場$X=y\,\partial/\partial y$について，
+				Levi-Civita接続に関して$\nabla_XX=0$であることを示せ．
+		\end{subproblems}
+\end{problems}
+
+$\nabla$を多様体$M$上のベクトル束$E$の接続とする．
+$E$の切断$s$に対し，$\nabla_Xs$の点$p\in M$での値$(\nabla_Xs)(p)\in E_p$は，
+$s$については点$p$の近くでの値のみに，$X$については点$p$における値$X_p\in T_pM$のみに依存する．
+これを以下の問題3.3，3.4において証明しよう．
+
+\begin{problems}
+	\item[3.3]
+		まず，$(\nabla_Xs)(p)$が
+		$s$，$X$の両方について$p$の近くでの値のみに依存することを示す．
+		\begin{subproblems}
+			\item
+				点$p$の開近傍$U$において$X_1|_U=X_2|_U$ならば$(\nabla_{X_1}s)|_U=(\nabla_{X_2}s)|_U$であることを示せ．
+				［ヒント：$X|_U=0\Longrightarrow(\nabla_Xs)|_U=0$を証明すれば十分．
+				各$q\in U$に対し，
+				点$q$の近傍で$\phi\equiv 0$，
+				$U^c$上で$\phi\equiv 1$であるような$\phi\in C^\infty(M)$がとれる（1の分割の存在による）．
+				$X|_U=0$なら$X=\phi X$である．ここで関数線型性を用いる．］
+			\item
+				点$p$の開近傍$U$において$s_1|_U=s_2|_U$ならば$(\nabla_Xs_1)|_U=(\nabla_Xs_2)|_U$であることを示せ．
+				［ヒント：(1)と同様．関数線型性のかわりにLeibniz則を使う．］
+		\end{subproblems}
+		\clearpage
+	\item[3.4]\phantom{}\vspace{-\baselineskip}
+		\begin{subproblems}
+			\item
+				$\nabla$を$M$上のベクトル束$E$の接続とし，$U$を$M$の開集合とする．
+				そのとき与えられた$s\in\Gamma(U,E)$と$X\in\mathfrak{X}(U)$に対し，
+				各点$p\in U$において，その近傍で$s$，$X$と一致するような
+				$\tilde{s}\in\Gamma(E)$，$\tilde{X}\in\mathfrak{X}(M)$をとって
+				$(\nabla_Xs)(p)=(\nabla_{\tilde{X}}\tilde{s})(p)$と定める．
+				これで$E|_U$の接続がうまく定義できていることを証明せよ（$\nabla$の$U$への制限）．
+			\item
+				$(\nabla_Xs)(p)$が$X$について点$p$における値$X_p$のみに依存することを示せ．
+				［ヒント：$X_p=0\Longrightarrow(\nabla_Xs)(p)=0$を証明すれば十分．
+				$p$を含むチャート$(U;x_1,\dots,x_n)$をとり，$X$を$U$において
+				\begin{equation}
+					X=X^i\frac{\partial}{\partial x^i}
+				\end{equation}
+				と表す．$X_p=0$とすれば$X^1(p)=\dots=X^n(p)=0$である．
+				$\nabla_Xs$を$U$において計算するにあたり，(1)によって$\nabla$を$E|_U$の接続とみてもよい．
+				その見方を用いて$(\nabla_Xs)(p)=0$を示せ．］
+		\end{subproblems}
+\end{problems}
+
+なお問題3.3，3.4と同様にして一般に，ベクトル束$E$，$F$について
+$T\colon\Gamma(E)\to\Gamma(F)$が関数線型（$f\in C^\infty(M)$に対し$T(fs)=fT(s)$である）ならば，
+任意の点$p\in M$に対し，$T(s)(p)$は$s(p)$のみに依存することがわかる．
+
+\begin{problems}
+	\item[3.5]
+		$(M,g)$をRiemann多様体とする．Levi-Civita接続の存在と一意性を証明しよう．
+		\begin{subproblems}
+			\item
+				まず各チャート$(U;x^1,\dots,x^n)$において考える．
+				$\nabla$を$TU$の接続とし，その接続係数を$\tensor{\Gamma}{^k_i_j}$とする．
+				捩率がゼロであるためには$\tensor{\Gamma}{^k_i_j}=\tensor{\Gamma}{^k_j_i}$が必要十分であった．
+				一方，$\nabla$が$g$と整合的であるためには，
+				$\tensor{\Gamma}{_k_i_j}=\tensor{g}{_k_l}\tensor{\Gamma}{^l_i_j}$とおいたとき
+				\begin{equation}
+					\label{eq:metric-compatible}
+					\tag{$*$}
+					\frac{\partial\tensor{g}{_j_k}}{\partial x^i}
+					=\tensor{\Gamma}{_k_i_j}+\tensor{\Gamma}{_j_i_k}
+				\end{equation}
+				が必要十分であることを証明せよ．
+			\item
+				引き続きチャート$(U;x^1,\dots,x^n)$において考察する．
+				$\tensor{\Gamma}{_k_i_j}=\tensor{\Gamma}{_k_j_i}$と
+				\eqref{eq:metric-compatible}をみたすような$n^3$個の関数$\tensor{\Gamma}{_k_i_j}$が
+				\begin{equation}
+					\label{eq:Levi-Civita}
+					\tag{$**$}
+					\tensor{\Gamma}{_k_i_j}
+					=\frac{1}{2}
+					\left(\frac{\partial\tensor{g}{_j_k}}{\partial x^i}
+					+\frac{\partial\tensor{g}{_i_k}}{\partial x^j}
+					-\frac{\partial\tensor{g}{_i_j}}{\partial x^k}\right)
+				\end{equation}
+				で与えられるものただ一組しか存在しないことを示せ．
+				これで各チャート$U$には捩率ゼロかつ計量と整合的な接続がただ一つ存在することがわかる．
+			\item
+				(2)で得られた接続を$\nabla^U$と書く．
+				各チャート$(U;x^1,\dots,x^n)$への制限が$\nabla^U$に一致するような
+				$TM$の接続$\nabla$がただ一つ存在することを示せ．
+		\end{subproblems}
+\end{problems}
+
+\end{document}

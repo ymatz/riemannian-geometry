@@ -1,0 +1,170 @@
+%! TeX program = upLaTeX
+\RequirePackage{plautopatch}
+\documentclass[uplatex,dvipdfmx,fontsize=12pt,jafontsize=11pt,line_length=42zw,number_of_lines=36,hanging_punctuation]{jlreq}
+\usepackage{jlreq-deluxe}
+\usepackage{libertinus}
+\usepackage[T1]{fontenc}
+\usepackage{libertinust1math}
+\usepackage{eucal}
+\usepackage{mathnotes-jlreq}
+\usepackage{tensor}
+
+\pagestyle{empty}
+
+\jlreqsetup{
+	itemization_label_length = 2.5zw,
+	itemization_labelsep = .5zw,
+}
+\setlength{\leftmargini}{3\zw}
+
+\newcommand{\bdry}{\partial}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\compose}{\mathbin{\circ}}
+\DeclareMathOperator{\Ric}{Ric}
+
+\begin{document}
+
+\begin{flushleft}
+	幾何学4\,／\,微分幾何学概論I（松本）
+	\hfill
+	2022年11月21日（2023年3月4日改訂）
+\end{flushleft}
+\setcounter{section}{5}
+\section{曲率(2)}
+
+Riemann多様体において$\nabla$と書いたら，Levi-Civita接続を表すものとする．
+
+\begin{problems}
+	\item[6.1]
+		回転放物面$M=\set{(x,y,z)\in\mathbb{R}^3|z=x^2+y^2}$
+		のGauss曲率$K$を$r=\sqrt{x^2+y^2}$の関数として求めよ．
+		ただし$M$には$\mathbb{R}^3$のEuclid計量から誘導されるRiemann計量を与える．
+
+		［注：
+		問題5.1で求めた曲率テンソルを利用することを想定している
+		（なお問題5.1では直交座標を使ったが，極座標を使うのもよい考えである）が，
+		第2基本形式を用いてGauss曲率を求めることもできる．
+		後者の方法を知っている人はそちらでも計算してみよう．］
+	\item[6.2]
+		Riemann多様体$(M,g)$の曲率テンソルがある定数$K$により
+		$\tensor{R}{_i_j_k_l}=K(\tensor{g}{_i_k}\tensor{g}{_j_l}-\tensor{g}{_i_l}\tensor{g}{_j_k})$
+		で与えられるとする．
+		そのとき$(M,g)$は定曲率$K$をもつことを確かめよ．
+		よって問題5.2の結果により球面$S^n$は定曲率$1$を，双曲空間$\mathbb{H}^n$は定曲率$-1$をもつ．
+	\item[6.3]
+		Riemann多様体$(M,g)$に対し，$\lambda$を正定数として$\tilde{g}=\lambda^2g$とおく．
+		もし$(M,g)$が$\mathbb{R}^N$の部分多様体なら，
+		$(M,\tilde{g})$は$(M,g)$を$\lambda$倍に相似拡大したものにあたる．
+		\begin{subproblems}
+			\item
+				$g$，$\tilde{g}$の定める2つのLevi-Civita接続は一致する．そのことを示せ．
+			\item
+				$g$，$\tilde{g}$の断面曲率のあいだには$\tilde{K}(\sigma)=\lambda^{-2}K(\sigma)$という関係が
+				あることを示せ\footnote{「相似拡大すると局所的な曲がり具合は小さくなる」
+				というのは直観にも合うであろう．人間は地球表面が曲がっていることを感知できない．}．
+		\end{subproblems}
+	\item[6.4]
+		Riemann多様体の曲率の性質
+		$\braket{R(X,Y)Z,W}=-\braket{R(X,Y)W,Z}$を\footnote{ここで$\braket{\cdot,\cdot}$は
+		$g(\cdot,\cdot)$のこと．}定義から直接的に導きたい．
+		\begin{subproblems}
+			\item
+				ベクトル場$X$，$Y$，$Z$，$W$に対し次を示せ：
+				\begin{equation}
+					XY\braket{Z,W}=\braket{\nabla_X\nabla_YZ,W}+\braket{Z,\nabla_X\nabla_YW}
+					+\braket{\nabla_XZ,\nabla_YW}+\braket{\nabla_YZ,\nabla_XW}.
+				\end{equation}
+			\item
+				$\braket{R(X,Y)Z,W}=-\braket{R(X,Y)W,Z}$を示せ．
+		\end{subproblems}
+	\item[6.5]
+		Riemann多様体の曲率について，$R(X,Y,Z)=R(X,Y)Z$とおくと
+		\begin{equation}
+			(\nabla_XR)(Y,Z,W)+(\nabla_YR)(Z,X,W)+(\nabla_ZR)(X,Y,W)=0
+		\end{equation}
+		であることを示せ（\emph{第2 Bianchi恒等式}）．
+		この結論を問題5.6で述べた記法を用いて
+		$\nabla_i\tensor{R}{_j_k^l_m}+\nabla_j\tensor{R}{_k_i^l_m}+\nabla_k\tensor{R}{_i_j^l_m}=0$とも書く．
+\end{problems}
+
+\clearpage
+
+\begin{problems}
+	\item[6.6]
+		断面曲率$K(\sigma)$が任意の点$p\in M$と任意の2次元部分空間$\sigma\subset T_pM$について
+		与えられれば曲率テンソルは一意的に定まることを示せ．
+		とくに問題6.2により，$(M,g)$が定曲率$K$をもつとき，曲率テンソルは
+		$\tensor{R}{_i_j_k_l}=K(\tensor{g}{_i_k}\tensor{g}{_j_l}-\tensor{g}{_i_l}\tensor{g}{_j_k})$
+		で与えられる．
+		
+		［ヒント：
+		断面曲率が与えられていることから，任意の$v$，$w\in T_pM$に対し$R(v,w,v,w)$はわかっている．
+		するとpolarizationにより$R(v,w_1,v,w_2)+R(v,w_2,v,w_1)$もわかる（断面曲率の値で表せる）．
+		そのことを念頭において，
+		$T_pM$の基底$e_1$，$e_2$，……，$e_n$を任意にとり$R(e_i,e_j,e_k,e_l)$について考えると，
+		\begin{equation}
+			R(e_i,e_j,e_k,e_l)+R(e_i,e_l,e_k,e_j),\qquad
+			R(e_i,e_j,e_l,e_k)+R(e_i,e_k,e_l,e_j)
+		\end{equation}
+		はわかっていることになる．さらに第1 Bianchi恒等式から
+		\begin{equation}
+			R(e_k,e_l,e_i,e_j)+R(e_l,e_j,e_i,e_k)+R(e_j,e_k,e_i,e_l)=0
+		\end{equation}
+		である．これらから$R(e_i,e_j,e_k,e_l)$が断面曲率の値を用いて表されることを結論せよ．］
+	\item[6.7]\phantom{}
+		\begin{subproblems}
+			\item[(1)]\vspace{-\baselineskip}
+				Riemann多様体において，$(0,2)$型テンソル$\Ric$を曲率テンソルの縮約によって
+				$\tensor{\Ric}{_i_j}=\tensor{R}{_k_i^k_j}$（$=-\tensor{R}{_i_k^k_j}$）
+				と定義する（\emph{Ricciテンソル}）\footnote{Ricciテンソルを$\tensor{R}{_i_j}$と
+				書くことも多い．この場合，Riemann曲率テンソルとの区別は添字の個数で行われる．}．
+				$\Ric$が対称テンソルであること，すなわち$\tensor{\Ric}{_i_j}=\tensor{\Ric}{_j_i}$であることを示せ．
+				［ヒント：第1 Bianchi恒等式．］
+			\item[(2)]
+				定曲率$K$をもつRiemann多様体$(M,g)$のRicciテンソルが
+				$\tensor{\Ric}{_i_j}=(n-1)K\tensor{g}{_i_j}$で与えられることを
+				確かめよ\footnote{ある定数$c\in\mathbb{R}$について
+				$\tensor{\Ric}{_i_j}=c\tensor{g}{_i_j}$となっているようなRiemann計量を
+				\emph{Einstein計量}という．
+				2次元，3次元では定曲率 $\Longleftrightarrow$ Einsteinだが4次元以上では違う．
+				\emph{Einstein方程式}$\tensor{\Ric}{_i_j}=c\tensor{g}{_i_j}$は
+				Riemann計量$\tensor{g}{_i_j}$に関する2階非線型偏微分方程式であり，
+				幾何学で現れる最も有名な偏微分方程式のひとつである．}．
+		\end{subproblems}
+	\item[6.8]\phantom{}
+		\begin{subproblems}
+			\item[(1)]\vspace{-\baselineskip}
+				Riemann多様体$(M,g)$において
+				$\tensor{\nabla}{^l}\tensor{R}{_i_j_k_l}
+				+\tensor{\nabla}{_i}\tensor{\Ric}{_j_k}
+				-\tensor{\nabla}{_j}\tensor{\Ric}{_i_k}=0$
+				であることを示せ．
+				なお，$\tensor{\nabla}{^m}\tensor{R}{_i_j_k_l}
+				=\tensor{g}{^m^p}\tensor{\nabla}{_p}\tensor{R}{_i_j_k_l}$とおき
+				（問題4.3の脚注も参照），
+				これを添字$l$，$m$に関して縮約したのが$\tensor{\nabla}{^l}\tensor{R}{_i_j_k_l}$である．
+				［ヒント：第2 Bianchi恒等式の縮約．
+				なお，テンソルの共変微分は縮約と可換であるように定められていたから，
+				たとえば$\tensor{\nabla}{_m}\tensor{\Ric}{_i_j}$は
+				$\tensor{\nabla}{_m}\tensor{R}{_k_i^l_j}$を添字$k$，$l$について縮約したものにも等しい
+				\footnote{これを$\tensor{\nabla}{_m}\tensor{R}{_k_i^k_j}$とも書く．
+				この記法からは共変微分と縮約操作のどちらが先に行われたのか判然としないのだが，
+				どちらでも結果は同じなので曖昧でかまわないのだ．
+				むしろ曖昧であることが便利だったりする．}．］
+			\item[(2)]
+				$S=\tensor{\Ric}{_i^i}$（$=\tensor{g}{^i^j}\tensor{\Ric}{_i_j}$）を
+				\emph{スカラー曲率}とよぶ\footnote{スカラー曲率を$R$と書くことも多い．}．
+				$\tensor{\nabla}{^j}\tensor{\Ric}{_i_j}=(1/2)\tensor{\nabla}{_i}S$
+				であることを示せ．［ヒント：(1)の等式をもう一度縮約．］
+			\item[(3)]
+				$\dim M\geqq 3$かつ$M$は連結であるとする．
+				$\tensor{\Ric}{_i_j}=f\tensor{g}{_i_j}$（$f$は関数）ならば
+				$f$は定数関数であることを示せ\footnote{したがって$\dim M\geqq 3$のとき，Einstein計量とは
+				$\tensor{\Ric}{_i_j}=f\tensor{g}{_i_j}$（$f$は関数）であるようなRiemann計量のことだといってもよい．
+				あるいは$\Ric=(S/n)g+\Ric_0$と書いて，Einstein計量とは
+				$\Ric_0$（Ricciテンソルの\emph{トレースレス部分}ないし\emph{トレースフリー部分}）が$0$であるような
+				Riemann計量のことだといってもよい．}．
+		\end{subproblems}
+\end{problems}
+
+\end{document}

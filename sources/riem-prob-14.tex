@@ -1,0 +1,114 @@
+%! TeX program = upLaTeX
+\RequirePackage{plautopatch}
+\documentclass[uplatex,dvipdfmx,fontsize=12pt,jafontsize=11pt,line_length=42zw,number_of_lines=36,hanging_punctuation]{jlreq}
+\usepackage{jlreq-deluxe}
+\usepackage{libertinus}
+\usepackage[T1]{fontenc}
+\usepackage{libertinust1math}
+\usepackage{eucal}
+\usepackage{mathnotes-jlreq}
+\usepackage{tensor}
+
+\pagestyle{empty}
+
+\jlreqsetup{
+	itemization_label_length = 2.5zw,
+	itemization_labelsep = .5zw,
+}
+\setlength{\leftmargini}{3\zw}
+
+\newcommand{\bdry}{\partial}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\compose}{\mathbin{\circ}}
+\DeclareMathOperator{\Ric}{Ric}
+\DeclareMathOperator{\id}{id}
+
+\begin{document}
+
+\begin{flushleft}
+	幾何学4\,／\,微分幾何学概論I（松本）
+	\hfill
+	2023年1月30日
+\end{flushleft}
+\setcounter{section}{13}
+\section{Cartan--Hadamardの定理}
+
+\begin{enumerate-problems}
+	\item[14.1]
+		完備Riemann多様体$(M,g)$が非正曲率をもつ（断面曲率が$K(\sigma)\leqq 0$をみたす）とする．
+		そのとき$M$のどんな測地線$\gamma\colon[0,\infty)\to M$も
+		始点$\gamma(0)$の共役点を$(0,\infty)$の範囲にもたないが，
+		これは以下のようにして，Rauchの比較定理を使わずに簡単に証明できる．
+
+		$\gamma$に沿って定義された$J(0)=0$，$\dot{J}(0)\not=0$をみたすJacobi場$J$を考える．
+		仮定$K(\sigma)\geqq 0$を用いて$\dfrac{d}{dt}\abs{J(t)}^2\geqq 0$を示せ．
+		またそのことから$t>0$で$\abs{J(t)}^2>0$であることを示せ．
+	\item[14.2]
+		$M$，$N$を$C^\infty$級多様体とし，$f\colon N\to M$を局所微分同相写像とする．
+		この$f$が次に述べる\emph{smooth path lifting property}をもつと仮定する．
+		\begin{quote}
+			任意の$C^\infty$級曲線$\gamma\colon[0,T]\to M$と$f(q_0)=\gamma(0)$をみたす$q_0\in N$に対し，
+			$q_0$を始点とする$C^\infty$級曲線$\tilde{\gamma}\colon[0,T]\to N$であって，
+			$\gamma$のリフトになっている（$f\circ\tilde{\gamma}=\gamma$をみたす）ようなものが存在する．
+		\end{quote}
+		そのとき$f$が可微分被覆写像であることを，以下に従って証明せよ．
+
+		［注：位相空間のあいだの連続写像$f\colon Y\to X$についても同様の主張があるが，
+		それが可微分カテゴリーでも成立するのだ，というのが本問の眼目である．］
+
+		\begin{enumerate-subproblems}
+			\item
+				任意に$p\in M$をとる．$M$は多様体だから，$p$の弧状連結かつ単連結な開近傍$U$をとれる．
+				$f^{-1}(U)$の連結成分への分解を
+				$f^{-1}(U)=\bigsqcup_{\alpha\in A}V_\alpha$
+				とする（$f^{-1}(U)$は多様体$N$の開集合であることから局所弧状連結なので，$V_\alpha$は弧状連結でもある）．
+				各$V_\alpha$が$N$の開集合であることを示せ．
+			\item
+				各$V_\alpha$への$f$の制限$f|_{V_\alpha}\colon V_\alpha\to U$を考える．
+				これが全単射であることを示せば，逆写像$(f|_{V_\alpha})^{-1}$の微分可能性は
+				$f$が局所微分同相写像であることから直ちにわかるので，
+				$f$が可微分被覆写像であると結論できる．
+
+				まず，$f|_{V_\alpha}$が全射であることを，smooth path lifting propertyを用いて示せ．
+			\item
+				$f|_{V_\alpha}$の単射性を示そう．
+				もし$f(q_1)=f(q_2)$，$q_1$，$q_2\in V_\alpha$ならば，
+				$q_1$を出発し$q_2$に至る$V_\alpha$の$C^\infty$級曲線$\gamma\colon[0,T]\to V_\alpha$がある．
+				$\underline{\gamma}=f\circ\gamma\colon[0,T]\to U$は$U$の閉曲線であり，
+				$U$の単連結性により定曲線にホモトピック．
+				このホモトピーを$F\colon[0,T]\times[0,1]\to U$とする（端点は固定しておく）．
+				$F$は$C^\infty$級写像とすることができる\footnote{本問はこの事実をとりあえず認めて解答してよい．
+				Friedrichsの軟化子をうまく使えばよいのだが，
+				写像$F$の値は多様体の点だから何らかの工夫が必要である．
+				$U$を$\mathbb{R}^n$の原点を中心とする開球を像とするようなチャートとしておき，
+				$F$を$\mathbb{R}^n$値関数とみなすのが一つの単純な方法だろう．}．
+
+				$F$が$\tilde{F}(t,0)=\gamma(t)$をみたすリフト$\tilde{F}\colon[0,T]\times[0,1]\to V_\alpha$
+				をもつことがわかれば$q_1=q_2$が従う．その理由を説明せよ．
+			\item
+				$0\leqq s_0<1$とする．$F$が仮に$[0,T]\times[0,s_0]$までは前述のようなリフト$\tilde{F}$をもつとしよう．
+				$[0,T]$のコンパクト性に注意して，
+				ある$\delta>0$が存在して$\tilde{F}$が$[0,T]\times[0,s_0+\delta)$における$F$のリフトに
+				拡張することを示せ．
+			\item
+				$0<s_0\leqq 1$とする．
+				$F$が$[0,T]\times[0,s_0)$において前述のようなリフト$\tilde{F}$をもつとしよう．
+				そのとき，$\tilde{F}$は$[0,T]\times[0,s_0]$における$F$のリフトに拡張することを示せ．
+
+				［ヒント：$\omega_{s_0}=F(t,s_0)$とおけば，$f$のsmooth path lifting propertyによって
+				$\omega_{s_0}$は$q_1$を始点とするリフト$\tilde{\omega}_{s_0}\colon[0,T]\to N$をもつ．
+				(4)と同様にして，$\tilde{\omega}_{s_0}$は
+				$[0,T]\times(s_0-\delta,s_0]$における$F$のリフト$\tilde{F}'$に拡張する．
+				ここで$s_0-\delta<s<s_0$に対しては，$F(\cdot,s)$の2通りのリフト
+				$\tilde{F}(\cdot,s)$，$\tilde{F}'(\cdot,s)$が得られたことになるが，
+				始点$\tilde{F}(0,s)$，$\tilde{F}'(0,s)$同士は一致することと$N$のHausdorff性に注意して，
+				実は$\tilde{F}(\cdot,s)=\tilde{F}'(\cdot,s)$であることを示せ．
+				したがって$\tilde{F}$と$\tilde{F}'$は定義域の共通部分で一致する．］
+			\item
+				(4)と(5)から，(3)で述べたようなリフト$\tilde{F}\colon[0,T]\times[0,1]\to V_\alpha$が
+				存在することを結論せよ．
+				ゆえに$f|_{V_\alpha}$は単射であり，$f$は可微分被覆写像であることがわかる．
+		\end{enumerate-subproblems}
+\end{enumerate-problems}
+
+\end{document}

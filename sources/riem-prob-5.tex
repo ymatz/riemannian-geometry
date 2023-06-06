@@ -1,0 +1,167 @@
+%! TeX program = upLaTeX
+\RequirePackage{plautopatch}
+\documentclass[uplatex,dvipdfmx,fontsize=12pt,jafontsize=11pt,line_length=42zw,number_of_lines=36,hanging_punctuation]{jlreq}
+\usepackage{jlreq-deluxe}
+\usepackage{libertinus}
+\usepackage[T1]{fontenc}
+\usepackage{libertinust1math}
+\usepackage{eucal}
+\usepackage{mathnotes-jlreq}
+\usepackage{tensor}
+
+\pagestyle{empty}
+
+\jlreqsetup{
+	itemization_label_length = 2.5zw,
+	itemization_labelsep = .5zw,
+}
+\setlength{\leftmargini}{3\zw}
+
+\newcommand{\bdry}{\partial}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\compose}{\mathbin{\circ}}
+\DeclareMathOperator{\sgn}{sgn}
+
+\begin{document}
+
+\begin{flushleft}
+	幾何学4\,／\,微分幾何学概論I（松本）
+	\hfill
+	2022年11月14日
+\end{flushleft}
+\setcounter{section}{4}
+\section{曲率(1)}
+
+\begin{problems}
+	\item[5.1$^\star$]
+		回転放物面$M=\set{(x,y,z)\in\mathbb{R}^3|z=x^2+y^2}$を考える．
+		$\mathbb{R}^3$のEuclid計量から誘導される$M$のRiemann計量を$g$とする．
+		正射影$\varphi\colon M\to\mathbb{R}^2$，$(x,y,z)\mapsto(x,y)$によって
+		チャート$(M,\varphi)$を与え，これにより定まる$M$の座標系を$(x,y)$で表す．
+		$(M,g)$のRiemann曲率テンソルの座標系$(x,y)$に関する局所表示$\tensor{R}{_i_j^k_l}$を考える
+		（$x$に対応する添字を$1$，$y$に対応する添字を$2$としよう）．
+		$\tensor{R}{_i_j^k_l}$をすべての$i$，$j$，$k$，$l$について求めよ．
+	\item[5.2]\phantom{}
+		\begin{subproblems}
+			\item[(1)]\vspace{-\baselineskip}
+				Riemann計量$g$があるチャート$(U;x^1,\dots,x^n)$において
+				$\tensor{g}{_i_j}=e^{2f}\tensor{\delta}{_i_j}$（$f$は関数）と局所表示されているとする．
+				$(0,4)$型の曲率テンソルが
+				\begin{multline}
+						\tensor{R}{_i_j_k_l}
+						=e^{2f}\Bigg(
+						{-\tensor{\delta}{_i_k}\tensor{f}{_j_l}}
+						+\tensor{\delta}{_i_l}\tensor{f}{_j_k}
+						+\tensor{\delta}{_j_k}\tensor{f}{_i_l}
+						-\tensor{\delta}{_j_l}\tensor{f}{_i_k}\\
+						+\tensor{\delta}{_i_k}\tensor{f}{_j}\tensor{f}{_l}
+						-\tensor{\delta}{_i_l}\tensor{f}{_j}\tensor{f}{_k}
+						-\tensor{\delta}{_j_k}\tensor{f}{_i}\tensor{f}{_l}
+						+\tensor{\delta}{_j_l}\tensor{f}{_i}\tensor{f}{_k}
+						-(\tensor{\delta}{_i_k}\tensor{\delta}{_j_l}
+						-\tensor{\delta}{_i_l}\tensor{\delta}{_j_k})\sum_{m=1}^nf_m^2\Bigg)
+				\end{multline}
+				で与えられることを確かめよ．
+				ただしここでは$\tensor{f}{_i}=\partial f/\partial x^i$，
+				$\tensor{f}{_i_j}=\partial^2f/\partial x^i\partial x^j$と書いている．
+			\item[(2)]
+				双曲空間$\mathbb{H}^n$の任意のチャートにおいて
+				$\tensor{R}{_i_j_k_l}=-(\tensor{g}{_i_k}\tensor{g}{_j_l}-\tensor{g}{_i_l}\tensor{g}{_j_k})$
+				であることを示せ．
+				［注：両辺ともにテンソルの局所表示になっており，
+				局所座標系の取りかえに関して同一の変換則をみたすので，
+				ある開集合$U$で定義された特定の局所座標系について等式を証明すれば，
+				$U$上のあらゆる局所座標系について同じ等式が証明されたことになる．］
+			\item[(3)]
+				球面$S^n$の任意のチャートにおいて
+				$\tensor{R}{_i_j_k_l}=\tensor{g}{_i_k}\tensor{g}{_j_l}-\tensor{g}{_i_l}\tensor{g}{_j_k}$
+				であることを示せ．
+		\end{subproblems}
+	\item[5.3]
+		$T\colon\underbrace{\mathfrak{X}(M)\times\dots\times\mathfrak{X}(M)}_{\text{$s$個}}
+		\to\Gamma(\underbrace{TM\otimes\dots\otimes TM}_{\text{$r$個}})$を多重実線型写像とする．
+		この$T$がある$(r,s)$型テンソル$\tilde{T}$によって与えられる写像に一致する\footnote{どんな
+		$X_1$，…，$X_s\in\mathfrak{X}(M)$を代入しても
+		$T(X_1,\dots,X_s)=\tilde{T}(X_1,\dots,X_s)$となるという意味でいっている．}ことは，
+		$T$が多重関数線型であることと同値である
+		（このとき$T$とテンソル$\tilde{T}$を同一視し，$T$はテンソル\kenten{である}という言い方をすることが多い）．
+		さて，接束$TM$の接続$\nabla$が与えられているとする．
+		\begin{subproblems}
+			\item[(1)]
+				$\tau(X,Y)=\nabla_XY-\nabla_YX-[X,Y]$が2重関数線型であることを確かめよ．
+				ゆえに$\tau$は$(1,2)$型テンソルである（捩率テンソル）\footnote{記号
+				$\tau$を使ったのは，単に上の説明ですでに$T$を使ってしまったからである．
+				$\tau$が一般的というわけではない．}．
+			\item[(2)]
+				$R(X,Y,Z)=R(X,Y)Z=\nabla_X\nabla_YZ-\nabla_Y\nabla_XZ-\nabla_{[X,Y]}Z$が
+				3重関数線型であることを確かめよ．
+				ゆえに$R$は$(1,3)$型テンソルである（Riemann曲率テンソル）．
+		\end{subproblems}
+	\item[5.4]
+		球面$S^2$における平行移動を調べたい．そのために次のように考える．
+		\begin{subproblems}
+			\item[(1)]
+				$(M,g)$を$n$次元Riemann多様体，$N$をその$k$次元部分多様体とする（ただし$k<n$）．
+				$N$の接束の接続$\nabla^N$を次のようにして定義しよう．
+				$X$，$Y$を$N$のベクトル場とする．
+				任意の点$p\in N$に対し，$p$を含む$M$のチャート$(U;x^1,\dots,x^n)$であって
+				$U\cap N=\set{q\in U|x^{k+1}(q)=\dots=x^n(q)=0}$
+				となるものをとれる．
+				そこで$U\cap N$に制限すると$X$，$Y$に一致するような
+				$U$のベクトル場$\tilde{X}$，$\tilde{Y}$をとる．
+				その上で，$(M,g)$のLevi-Civita接続$\nabla$を用いて
+				\begin{equation}
+					(\nabla^N_XY)(p)=\text{$(\nabla_{\tilde{X}}\tilde{Y})(p)$の接成分}
+				\end{equation}
+				と定める．
+				$(\nabla^N_XY)(p)$がwell-definedであることを示せ．
+				また，$h$を$N$に誘導されるRiemann計量とするとき，
+				$\nabla^N$は$(N,h)$のLevi-Civita接続であることを示せ．
+			\item[(2)]
+				(1)と同じ状況設定のもとで，$N$の曲線$\gamma\colon I\to N$を考える．
+				また$X=X(t)$を$\gamma$に沿って定義された$N$のベクトル場とする．
+				$\nabla^N_{\dot{\gamma}}X=0$であるためには，
+				$\nabla_{\dot{\gamma}}X$が各$t\in I$において$T_{\gamma(t)}N$に直交していることが
+				必要十分であることを示せ．
+			\item[(3)]
+				$S^2=\set{(x,y,z)\in\mathbb{R}^3|x^2+y^2+z^2=1}$について，
+				点$(1,0,0)\in S^2$における接ベクトル$v=(\partial/\partial y)_{(1,0,0)}$を考える．
+				$S^2$の曲線$\gamma_1\colon[0,\pi]\to S^2$，$\gamma_1(t)=(\cos t,\sin t,0)$に沿った
+				$v$の平行移動を求めよ．
+				また$\gamma_2\colon[0,\pi]\to S^2$，$\gamma_2(t)=(\cos t,0,\sin t)$に沿った
+				$v$の平行移動を求めよ．
+		\end{subproblems}
+	\item[5.5]
+		双曲平面$\mathbb{H}^2$における平行移動を調べよう．
+		上半平面モデルによる座標系$(x,y)$を用いる．
+		曲線$\gamma\colon(-\infty,\infty)\to\mathbb{H}^2$，$\gamma(t)=(t,1)$を考える．
+		$\gamma$に沿って定義された平行なベクトル場$X(t)$であって，
+		$X(0)=(\partial/\partial y)_{(0,1)}$であるようなものを求めよ．
+	\item[5.6]
+		接束$TM$の接続$\nabla$があるとき，
+		任意のテンソル束$E$に対し，
+		$\nabla\colon\Gamma(E)\to\Gamma(T^*M\otimes E)$
+		という線型写像が定義される．
+		具体的には，$E$が$(r,s)$型テンソル束なら，
+		$T\in\Gamma(E)$に対し$(r,s+1)$型テンソル$\nabla T\in\Gamma(T^*M\otimes E)$を
+		\begin{equation}
+			(\nabla T)(X,X_1,\dots,X_s)=(\nabla_X T)(X_1,\dots,X_s)
+		\end{equation}
+		によって定義する（$\nabla T$は各変数について関数線型だからテンソル）．
+		たとえば$T$が$TM\otimes T^*M\otimes T^*M$の切断ならば，
+		テンソル$\nabla T$は$T^*M\otimes TM\otimes T^*M\otimes T^*M$の切断である．
+		この例では$\nabla T$を局所表示によって$\tensor{(\nabla T)}{_i^j_k_l}$と書くことができるが，
+		この$\tensor{(\nabla T)}{_i^j_k_l}$を$\nabla_i\tensor{T}{^j_k_l}$とも書くものと約束する．
+
+		接束の任意の接続$\nabla$と任意のベクトル場$X$に対し
+		\begin{equation}
+			\nabla_i\nabla_jX^k-\nabla_j\nabla_iX^k
+			=\tensor{R}{_i_j^k_l}X^l-\tensor{\tau}{^l_i_j}\tensor{\nabla}{_l}\tensor{X}{^k}
+		\end{equation}
+		であることを示せ．ただし$\tau$は捩率テンソル．
+		［注：$\nabla_i\nabla_jX^k$は$\tensor{(\nabla(\nabla X))}{_i_j^k}$のことで，
+		一般に$(\nabla_{\frac{\partial}{\partial x^i}}\nabla_{\frac{\partial}{\partial x^j}}X)^k$に
+		等しくはない．］
+\end{problems}
+
+\end{document}

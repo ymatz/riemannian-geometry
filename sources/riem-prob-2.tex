@@ -1,0 +1,145 @@
+%! TeX program = upLaTeX
+\RequirePackage{plautopatch}
+\documentclass[uplatex,dvipdfmx,fontsize=12pt,jafontsize=11pt,line_length=42zw,number_of_lines=36,hanging_punctuation]{jlreq}
+\usepackage{jlreq-deluxe}
+\usepackage{libertinus}
+\usepackage[T1]{fontenc}
+\usepackage{libertinust1math}
+\usepackage{eucal}
+\usepackage{mathnotes-jlreq}
+\usepackage{tensor}
+
+\pagestyle{empty}
+
+\jlreqsetup{
+	itemization_label_length = 2.5zw,
+	itemization_labelsep = .5zw,
+}
+\setlength{\leftmargini}{3\zw}
+
+\newcommand{\bdry}{\partial}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\compose}{\mathbin{\circ}}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\End}{End}
+
+\begin{document}
+
+\begin{flushleft}
+	幾何学4\,／\,微分幾何学概論I（松本）
+	\hfill
+	2022年10月17日（2023年3月5日改訂）
+\end{flushleft}
+\setcounter{section}{1}
+\section{Riemann計量}
+
+\begin{problems}
+	\item[2.1$^\star$]
+		$S^n\subset\mathbb{R}^{n+1}$から北極$p_+=(0,\dotsc,0,1)$を除いた開集合$U=S^n\setminus\set{p_+}$において，
+		$p_+$を中心とするステレオグラフィック射影によって定義される局所座標系$(x^1,\dots,x^n)$を考える．
+		すなわち，各$x^i$は$U$で定義された関数で，
+		$(y^1,\dots,y^{n+1})$を$\mathbb{R}^{n+1}$の標準的な座標系とすれば
+		\begin{equation}
+			y^i=\frac{2x^i}{1+\abs{x}^2}\quad\text{（$i=1$, $\dots$, $n$），}\qquad
+			y^{n+1}=-\frac{1-\abs{x}^2}{1+\abs{x}^2}
+		\end{equation}
+		である（ただし$\abs{\cdot}$は$\mathbb{R}^n$における通常のノルム）．
+		この局所座標系$(x^1,\dots,x^n)$に関して，$S^n$の通常のRiemann計量$g$は
+		\begin{equation}
+			\tensor{g}{_i_j}=\frac{4}{(1+\abs{x}^2)^2}\tensor{\delta}{_i_j}
+		\end{equation}
+		と表されることを示せ．$n=2$の場合だけを考えることにしてもよい．
+
+		［ヒント：局所表示の変換則を用いて求めることも可能だが，
+		直接的に$\partial/\partial x^i$を$\mathbb{R}^{n+1}$の接ベクトルとして表すことで
+		$\tensor{g}{_i_j}=g(\partial/\partial x^i,\partial/\partial x^j)$を求めるほうが簡単だろう．］
+	\item[2.2]
+		双曲空間$\mathbb{H}^n$のRiemann計量$g$は，
+		$\mathbb{H}^n$をPoincar\'e開球モデルによって単位開球$B^n$とみなすとき，
+		標準座標系$(x^1,\dots,x^n)$を用いて
+		\begin{equation}
+			\tensor{g}{_i_j}=\frac{4}{(1-\abs{x}^2)^2}\tensor{\delta}{_i_j}
+		\end{equation}
+		によって与えられる．
+
+		$\mathbb{H}^n$は次の写像$\varphi$によって上半空間$H^n=\set{(y',y^n)\in\mathbb{R}^n|y^n>0}$とも同一視される：
+		\begin{equation}
+			\varphi\colon B^n\to H^n,\qquad
+			\varphi(x)=2\frac{x+e_n}{\abs{x+e_n}^2}-e_n,\qquad
+			e_n=(0,\dots,0,1).
+		\end{equation}
+		この$\varphi$を$\mathbb{H}^n$のチャートと考えることができる．
+		そうすることにより$(y^1,\dots,y^n)$を$\mathbb{H}^n$の座標系とみなす．
+		$(y^1,\dots,y^n)$に関して$g$がどのように表示されるか求めたい．
+		\begin{subproblems}
+			\item
+				$y=\varphi(x)$のとき$\abs{x+e_n}\abs{y+e_n}=2$であることを示せ．
+				さらに$1-\abs{x}^2=4y^n/\abs{y+e_n}^2$であることを示せ．
+				［ヒント：$X=x+e_n$，$Y=y+e_n$とおくと計算しやすい．］
+			\item
+				座標系$(y^1,\dots,y^n)$に関して
+				\begin{equation}
+					\tensor{g}{_i_j}=\frac{1}{(y^n)^2}\tensor{\delta}{_i_j}
+				\end{equation}
+				であることを示せ．
+		\end{subproblems}
+\end{problems}
+
+\subsection*{【補足】Riemann計量の引き戻し}
+
+$f\colon N\to M$を$C^\infty$級写像，$g$を$M$のRiemann計量とするとき，各点$p\in N$において
+\begin{equation}
+	h_p(v,w):=g_{f(p)}(f_*v,f_*w),
+	\qquad v,\,w\in T_pN
+\end{equation}
+によって$h_p$を定義することにより，$N$のRiemann計量$h$が定まる．
+この$h$を$f^*g$と書いて，Riemann計量$g$の$f$による\emph{引き戻し}（pullback）とよぶ．
+
+\begin{ex}
+	$M$のRiemann計量$g$から部分多様体$N$に誘導される計量とは，
+	包含写像$\iota\colon N\hookrightarrow M$による$g$の引き戻しのことだといってもよい．
+\end{ex}
+
+\begin{ex}
+	Riemann計量$g$のチャート$(U,\varphi)$に関する局所表示とは，
+	$g|_U$の$\varphi^{-1}\colon \varphi(U)\to U$による引き戻しを
+	$\varphi(U)\subset\mathbb{R}^n$の標準座標系によって表示したものともいえる．
+	さらにこの観点からいえば，局所表示の変換というのは，
+	$\varphi\compose\psi^{-1}$による引き戻しだとみなすこともできる．
+\end{ex}
+
+いま$M$のRiemann計量が$g=\tensor{g}{_i_j}dx^idx^j$と表されているとする．また，写像$f$を$M$のチャート$(U,\varphi)$と
+$N$のチャート$(V,\psi)$で$f(V)\subset U$をみたすものを用いて
+\begin{equation}
+	f(y^1,\dots,y^n)=(f^1(y^1,\dots,y^n),\dots,f^m(y^1,\dots,y^n))
+\end{equation}
+と表す
+（正確には$f(\psi^{-1}(y^1,\dots,y^n))=\varphi^{-1}(f^1(y^1,\dots,y^n),\dots,f^m(y^1,\dots,y^n))$の意）．
+
+このとき$h=f^*g$を求めるにはどうしたらいいか．
+$\tensor{g}{_i_j}dx^idx^j$に$x^i=f^i(y^1,\dots,y^n)$を「代入」して整理すればよい．
+というのは，
+\begin{equation}
+	\begin{split}
+		g(f_*v,f_*w)
+		&=\tensor{g}{_i_j}dx^i(f_*v)dx^j(f_*w)
+		=\tensor{g}{_i_j}(f^*dx^i)(v)(f^*dx^j)(w) \\
+		&=\tensor{g}{_i_j}d(f^*x^i)(v)d(f^*x^j)(w)
+		=\tensor{g}{_i_j}df^i(v)df^j(w)
+	\end{split}
+\end{equation}
+が成り立つからである．
+
+上記の計算方法を用いて問題2.1，2.2について考え直してみるとよい．
+「式が勝手に計算してくれる」感覚がわくのではないかと思う．
+
+なお，微分同相写像$f\colon M\to M$が$f^*g=g$をみたすとき$f$は$M$の\emph{等長変換}であるという．
+たとえばEuclid空間$\mathbb{R}^n$の等長変換の例としては，平行移動，直交行列の作用，およびそれらの合成が挙げられる．
+実は$\mathbb{R}^n$の等長変換は以上のもので尽くされる．
+これを証明するには，ある点$p\in M$について，「点$p$を固定する等長変換であって
+$T_pM$の直交変換を誘導するようなものは恒等変換しかない」ということを証明すればよい（なぜか？）．
+
+実は，連結なRiemann多様体について一般に，任意の$p\in M$について「」に書かれたことが成り立つ．
+これを証明するには，あとで導入する正規座標系の概念を用いるのがよい．
+
+\end{document}

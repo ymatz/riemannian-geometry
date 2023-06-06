@@ -1,0 +1,92 @@
+%! TeX program = upLaTeX
+\RequirePackage{plautopatch}
+\documentclass[uplatex,dvipdfmx,fontsize=12pt,jafontsize=11pt,line_length=42zw,number_of_lines=36,hanging_punctuation]{jlreq}
+\usepackage{jlreq-deluxe}
+\usepackage{libertinus}
+\usepackage[T1]{fontenc}
+\usepackage{libertinust1math}
+\usepackage{eucal}
+\usepackage{mathnotes-jlreq}
+\usepackage{tensor}
+
+\pagestyle{empty}
+
+\jlreqsetup{
+	itemization_label_length = 2.5zw,
+	itemization_labelsep = .5zw,
+}
+\setlength{\leftmargini}{3\zw}
+
+\newcommand{\bdry}{\partial}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\compose}{\mathbin{\circ}}
+\DeclareMathOperator{\Ric}{Ric}
+\DeclareMathOperator{\id}{id}
+
+\begin{document}
+
+\begin{flushleft}
+	幾何学4\,／\,微分幾何学概論I（松本）
+	\hfill
+	2022年12月5日
+\end{flushleft}
+\setcounter{section}{7}
+\section{測地線(2)}
+
+\begin{enumerate-problems}
+	\item[8.1]
+		Riemann多様体$(M,g)$の任意の点$p\in M$に対し，
+		ある開近傍$U$と$\varepsilon>0$が存在して，
+		任意の$q\in U$に対し指数写像$\exp_q$が$B_\varepsilon(0)\subset T_qM$で定義されて
+		像$B_\varepsilon(q)=\exp_q(B_\varepsilon(0))$の上への微分同相写像となる．
+		このことを次のようにして証明せよ．
+
+		\begin{enumerate-subproblems}
+			\item
+				正規形常微分方程式の一般論によって，点$p$の開近傍$U$と$\varepsilon>0$を
+				「任意の$q\in U$に対し指数写像$\exp_q$が$B_\varepsilon(0)\subset T_qM$で定義される」ように
+				とれる．そのようにとった$U$と$\varepsilon$を用いて，$\mathcal{U}\subset TM$を
+				\begin{equation}
+					\mathcal{U}=\bigsqcup_{q\in U}\set{v\in T_qM|\abs{v}<\varepsilon}
+				\end{equation}
+				で定義しよう．$T_qM$のベクトル$v$を$(q,v)$とも書くことにして，
+				$F\colon\mathcal{U}\to U\times M$を$F(q,v)=(q,\exp_q(v))$によって定義する．
+				接束$TM$の点$(p,0)$における接空間は$T_pM\oplus T_pM$と同一視できるが，
+				この同一視のもとで
+				$(dF)_{(p,0)}=\id_{T_pM\oplus T_pM}$であることを示せ．
+			\item
+				(1)の結論と逆写像定理により，点$(p,0)$のある開近傍$\mathcal{U}'\subset\mathcal{U}$が存在して，
+				$F$は$\mathcal{U}'$から$F(\mathcal{U}')$への微分同相写像を与える．
+				$\mathcal{U}'$は小さく取り直してもよいので，
+				\begin{equation}
+					\mathcal{U}'=\bigsqcup_{q\in U'}\set{v\in T_qM|\abs{v}<\varepsilon'}
+				\end{equation}
+				という形であるとしてよい．
+				このとき，任意の$q\in U'$に対し$\exp_q$が
+				$B_{\varepsilon'}(0)\subset T_qM$から$B_{\varepsilon'}(q)$への
+				微分同相写像であることを示せ．
+		\end{enumerate-subproblems}
+	\item[8.2]
+		曲線$\gamma\colon I\to M$の局所最短性は，次の条件($*$)とは同値でないことを説明せよ．
+		\begin{enumerate-conditions}
+			\item[($*$)]
+				任意の$t_0\in I$に対し，$t_0$の近傍$I'\subset I$が存在して，
+				任意の$t\in I'\setminus\set{t_0}$に対し，
+				$\gamma|_{[t_0,t]}$（$t>t_0$のとき）
+				ないし$\gamma|_{[t,t_0]}$（$t<t_0$のとき）
+				は同じ始点と終点をもつ区分的に滑らかな曲線の中で最短である．
+		\end{enumerate-conditions}
+	\item[8.3]
+		区分的に滑らかな曲線$\gamma\colon[a,b]\to M$が，
+		同じ始点と終点をもつ区分的に滑らかな曲線のうちで最短であるとする．
+		そのとき$\gamma$は局所最短性ももつことを示せ．
+		（したがって$\gamma$はパラメタづけを変更すれば測地線である．）
+	\item[8.4]
+		閉Riemann多様体$(M,g)$では\footnote{閉Riemann多様体とはコンパクトなRiemann多様体のこと．}，
+		ある$\varepsilon>0$が存在して，任意の点$p\in M$に対して
+		指数写像$\exp_p$が$B_\varepsilon(0)\subset T_pM$で定義されて
+		像$B_\varepsilon(p)=\exp_p(B_\varepsilon(0))$の上への微分同相写像となることを示せ．
+		（そのような$\varepsilon$の上限は$(M,g)$の\emph{単射半径}とよばれる．）
+\end{enumerate-problems}
+
+\end{document}

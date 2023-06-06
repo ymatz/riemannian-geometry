@@ -1,0 +1,142 @@
+%! TeX program = upLaTeX
+\RequirePackage{plautopatch}
+\documentclass[uplatex,dvipdfmx,fontsize=12pt,jafontsize=11pt,line_length=42zw,number_of_lines=36,hanging_punctuation]{jlreq}
+\usepackage{jlreq-deluxe}
+\usepackage{libertinus}
+\usepackage[T1]{fontenc}
+\usepackage{libertinust1math}
+\usepackage{eucal}
+\usepackage{mathnotes-jlreq}
+\usepackage{tensor}
+
+\pagestyle{empty}
+
+\jlreqsetup{
+	itemization_label_length = 2.5zw,
+	itemization_labelsep = .5zw,
+}
+\setlength{\leftmargini}{3\zw}
+
+\newcommand{\bdry}{\partial}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\compose}{\mathbin{\circ}}
+\DeclareMathOperator{\Ric}{Ric}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Vol}{Vol}
+\DeclareMathOperator{\Area}{Area}
+
+\begin{document}
+
+\begin{flushleft}
+	幾何学4\,／\,微分幾何学概論I（松本）
+	\hfill
+	2023年1月16日
+\end{flushleft}
+\setcounter{section}{11}
+\section{Rauchの比較定理}
+
+\begin{enumerate-problems}
+	\item[12.1]
+		ある種の状況下では，Rauchの比較定理から得られる帰結は比較的簡単に直接示せる．
+
+		例として，本問では非正曲率をもつ$(M,g)$を考える
+		（断面曲率が各点で任意の$\sigma$に対して$K(\sigma)\leqq 0$をみたすとする）．
+		そのときRauchの比較定理を用いてEuclid空間と比較することにより，
+		任意の測地線$\gamma\colon[0,T]\to M$および
+		$\gamma$に沿った法Jacobi場$J$で$J(0)=0$，$\abs{\dot{J}(0)}=1$をみたすものに対し
+		（$\dot{J}$は$\nabla_{\dot{\gamma}}J$のこと），
+		$0\leqq t\leqq T$で$\abs{J(t)}\geqq t$が成り立つことが従う．
+		とくに$t>0$で$J(t)\not=0$だが\footnote{このことから$\gamma$上に
+		点$\gamma(0)$の共役点が存在しないことも直ちにわかる．これは任意のJacobi場は
+		接成分と法成分に分解しても各々の成分がJacobi場であり，
+		しかも接Jacobi場とは$(a+bt)\dot{\gamma}(t)$という形（$a$，$b\in\mathbb{R}$）のベクトル場にすぎないからである．
+		次回触れる．}，
+		これを直接証明してみよう．
+		\begin{enumerate-subproblems}
+			\item
+				$f(t)=\abs{J(t)}^2$とおく．これは$C^\infty$級関数である
+				（局所座標系を用いれば$J(t)$の各成分は$t$について$C^\infty$級だから
+				\footnote{もし$f(t)=\abs{J(t)}$としてしまうと，
+				$J(t)=0$となる$t$において$f(t)$が微分可能でない恐れが生じる．}）．
+				$f'(t)=2\braket{J(t),\dot{J}(t)}$，
+				$f''(t)=2\abs{\dot{J}(t)}^2+2\braket{J(t),\ddot{J}(t)}$
+				である．これと仮定$K(\sigma)\leqq 0$を用いて$f''(t)\geqq 0$を示せ．
+			\item
+				$f(0)=f'(0)=0$，$f''(0)=1$に注意して，$t>0$ならば$f(t)>0$である
+				（したがって$J(t)\not=0$である）ことを示せ．
+		\end{enumerate-subproblems}
+	\item[12.2]
+		$\gamma\colon[a,b]\to M$を測地線とする．
+		$(\gamma_s)_{-\varepsilon<s<\varepsilon}$を$\gamma$の変分であって両端を固定するようなものとするとき，
+		変分ベクトル場を$V$とすれば
+		\begin{equation}
+			\left.\frac{dE(\gamma_s)}{ds}\right|_{s=0}=0,\qquad
+			\left.\frac{d^2E(\gamma_s)}{ds^2}\right|_{s=0}=I(V,V)
+		\end{equation}
+		であった．
+
+		実は，$(\gamma_s)$が両端を固定するような変分でなかったとしても，
+		$s\mapsto\gamma_s(a)$，$s\mapsto\gamma_s(b)$がそれぞれ測地線になっていれば同じ等式が成り立つ．
+		それを確かめよ．
+		ただしここでは
+		$\displaystyle I(V,V)=\int_a^b(\abs{\nabla_{\dot{\gamma}}V}^2+\braket{R(\dot{\gamma},V)\dot{\gamma},V})dt$
+		をindex form $I(V,V)$の定義とする．
+	\clearpage
+	\item[12.3]
+		$(M,g)$，$(\tilde{M},\tilde{g})$はRiemann多様体で$\dim M\leqq \dim\tilde{M}$とする．
+		任意の$p\in M$，$\sigma\subset T_pM$と
+		任意の$\tilde{p}\in\tilde{M}$，$\tilde{\sigma}\subset T_{\tilde{p}}\tilde{M}$について
+		断面曲率の値が$K(\sigma)\geqq K(\tilde{\sigma})$をみたすと仮定する．
+
+		あらためて点$p\in M$，$\tilde{p}\in\tilde{M}$をとり固定する．
+		正の数$r$を，点$p$における指数写像$\exp_p$が$B_r(0)\subset T_pM$で定義されて臨界点をもたず，
+		また$\exp_{\tilde{p}}$も$B_r(0)\subset T_{\tilde{p}}\tilde{M}$で定義されるようにとっておく
+		\footnote{本問はCheeger \& Ebin, \textit{Comparison Theorems
+		in Riemannian Geometry}の系1.35やdo Carmo, \textit{Riemannian Geometry}の第10章命題2.5にあたるが，
+		これらの文献は$r$にもっと強い制約を課している．ここに書いたことで十分なように思えるのだがどうでしょうか．
+		修正が必要であればそれも検討して，私に教えてください．}．
+		\begin{enumerate-subproblems}
+			\item
+				$0<T<r$として，$\gamma\colon[0,T]\to M$，$\tilde{\gamma}\colon[0,T]\to\tilde{M}$を
+				それぞれ$p$，$\tilde{p}$を始点とする速さ$1$の測地線とする．
+				$v\in T_pM$，$\tilde{v}\in T_{\tilde{p}}\tilde{M}$であって
+				$\abs{v}=\abs{\tilde{v}}$，
+				$\braket{\dot{\gamma}(0),v}=\braket{\dot{\tilde{\gamma}}(0),\tilde{v}}$
+				をみたすものに対し，
+				$0\leqq t\leqq T$について
+				$\abs{(d\exp_p)_{t\dot{\gamma}(0)}(v)}\leqq\abs{(d\exp_{\tilde{p}})_{t\dot{\tilde{\gamma}}(0)}(\tilde{v})}$
+				であることを示せ．
+				［ヒント：$J(t)=(d\exp_p)_{t\dot{\gamma}(0)}(tv)$は$\gamma$に沿ったJacobi場で
+				$J(0)=0$，$\dot{J}(0)=v$である．
+				$\tilde{J}(t)=(d\exp_{\tilde{p}})_{t\dot{\tilde{\gamma}}(0)}(t\tilde{v})$についても同様．］
+			\item
+				$\varphi\colon T_pM\to T_{\tilde{p}}\tilde{M}$を内積を保つ線型同型写像とする．
+				任意に与えたなめらかな曲線$c\colon[a,b]\to B_r(0)\subset T_pM$に対し
+				\begin{equation}
+					\omega(s)=\exp_p(c(s)),\qquad
+					\omega_0(s)=\exp_{p_0}(\varphi\circ c(s)),\qquad
+					a\leqq s\leqq b
+				\end{equation}
+				と定める．
+				そのとき$L(\omega)\leqq L(\omega_0)$であることを示せ．
+		\end{enumerate-subproblems}
+
+		［コメント：これと似たアイディアに基づき，次のような\emph{体積比較定理}を導くこともできる．
+		$n$次元完備Riemann多様体$(M,g)$について，ある$k\in\mathbb{R}$が存在して
+		$(M,g)$のRicciテンソルが各点で$\Ric\geqq (n-1)k$をみたすとき
+		\footnote{Ricciテンソルは各点で$T_pM$上の対称双線型形式を定めるが，
+		その最小固有値が$\geqq (n-1)k$であるという意味．}，
+		定断面曲率$k$をもつ$n$次元単連結完備Riemann多様体\footnote{$k>0$なら半径$1/\sqrt{k}$の球面，
+		$k=0$ならEuclid空間，$k<0$なら双曲空間を適当に相似拡大または縮小して断面曲率が$k$になるようにしたもの．}に
+		おける半径$r$の球の体積を$\Vol(B^k_r)$と書けば，
+		$(M,g)$の任意の点$p$を中心とする距離球$B^d_r(p)$の体積$\Vol(B^d_r(p))$は
+		\begin{equation}
+			\Vol(B^d_r(p))\leqq\Vol(B^k_r)
+		\end{equation}
+		をみたす（\emph{Bishopの比較定理}）．
+		これはさらに
+		「$\Vol(B^d_r(p))/\Vol(B^k_r)$は$r$について単調減少である」という形で精密化される
+		（\emph{Bishop--Gromovの比較定理}）．］
+\end{enumerate-problems}
+
+\end{document}

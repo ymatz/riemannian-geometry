@@ -1,0 +1,135 @@
+%! TeX program = upLaTeX
+\RequirePackage{plautopatch}
+\documentclass[uplatex,dvipdfmx,fontsize=12pt,jafontsize=11pt,line_length=42zw,number_of_lines=36,hanging_punctuation]{jlreq}
+\usepackage{jlreq-deluxe}
+\usepackage{libertinus}
+\usepackage[T1]{fontenc}
+\usepackage{libertinust1math}
+\usepackage{eucal}
+\usepackage{mathnotes-jlreq}
+\usepackage{tensor}
+
+\pagestyle{empty}
+
+\jlreqsetup{
+	itemization_label_length = 2.5zw,
+	itemization_labelsep = .5zw,
+}
+\setlength{\leftmargini}{3\zw}
+
+\newcommand{\bdry}{\partial}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\compose}{\mathbin{\circ}}
+\DeclareMathOperator{\id}{id}
+
+\begin{document}
+
+\begin{flushleft}
+	幾何学4\,／\,微分幾何学概論I（松本）
+	\hfill
+	2022年11月28日
+\end{flushleft}
+\setcounter{section}{6}
+\section{測地線(1)}
+
+\begin{enumerate-problems}
+	\item[7.1]
+		球面$S^n$の測地線について調べる．
+		\begin{enumerate-subproblems}
+			\item
+				$\mathbb{R}^{n+1}$の互いに直交する2つの単位ベクトル$a$，$b$を用いて
+				\begin{equation}
+					\gamma_{a,b}(t)=(\cos t)a+(\sin t)b,\qquad t\in(-\infty,\infty)
+				\end{equation}
+				と定める．
+				$\gamma_{a,b}$が$S^n$の測地線であることを示せ．［ヒント：問題5.4を利用せよ．］
+			\item
+				速さ$1$の測地線$\gamma\colon I\to S^n$は
+				ある$a$，$b$を用いて$\gamma(t)=\gamma_{a,b}(t)$と表されることを示せ．
+				［ヒント：$0\in I$と仮定して問題ない．
+				そして測地線は$\gamma(0)$，$\dot{\gamma}(0)$を指定すれば一意的．］
+		\end{enumerate-subproblems}
+	\item[7.2]
+		双曲平面$\mathbb{H}^2$の測地線について調べる．
+		上半平面モデル$H^2=\set{(x,y)\in\mathbb{R}^2|y>0}$を用いることにしよう．
+		Riemann計量は$g=y^{-2}(dx^2+dy^2)$で与えられる．
+		\begin{enumerate-subproblems}
+			\item
+				$\gamma_0(t)=(0,e^t)$で定義される曲線
+				$\gamma_0\colon(-\infty,\infty)\to H^2$が測地線であることを示せ．
+				［ヒント：問題3.2．］
+			\item
+				点$(x,y)$を複素数$z=x+iy$と同一視する．
+				次の3種類の写像がそれぞれ$H^2$の等長変換を与えることを示せ．
+				\begin{enumerate-alphabet}
+					\item $\Phi(z)=\lambda z$（$\lambda$は正の実数）．
+					\item $\Phi(z)=z+c$（$c$は実数）．
+					\item $\Phi(z)=-1/z$．
+				\end{enumerate-alphabet}
+			\item
+				速さ$1$の測地線$\gamma\colon I\to H^2$は
+				ある等長変換$\Phi$によって
+				$\gamma=\Phi\compose\gamma_0$と表されることを示せ．
+
+				［ヒント：長さ$1$の任意の接ベクトル$v\in T_{(0,1)}H^2$に対し，
+				$\gamma(0)=(0,1)$，$\dot{\gamma}(0)=v$をみたす測地線$\gamma$を$\Phi\compose\gamma_0$の
+				形で表せることを示せば十分である（なぜか？）．
+				任意の実数$c$に対し，(2)で挙げた3種類の写像を合成して得られる
+				\begin{equation}
+					z\mapsto z+c
+					\mapsto -\frac{1}{z+c}
+					\mapsto -\frac{c^2+1}{z+c}
+					\mapsto -\frac{c^2+1}{z+c}+c=\frac{cz+1}{z+c}
+				\end{equation}
+				も等長変換であることを利用せよ．］
+		\end{enumerate-subproblems}
+		\clearpage
+	\item[7.3]\phantom{}
+		\begin{enumerate-subproblems}
+			\item\vspace{-\baselineskip}
+				$(M,g)$を連結なRiemann多様体とし，$\Phi\colon M\to M$を等長変換とする．
+				ある点$p\in M$において$\Phi(p)=p$，$(d\Phi)_p=\id_{T_pM}$ならば
+				$\Phi$は恒等変換であることを示せ．
+				［ヒント：$A=\set{q\in M|\Phi(q)=q,\,(d\Phi)_q=\id_{T_qM}}$とおく．
+				仮定によって$A$は空集合ではない．$A$が開集合かつ閉集合であることを示す．］
+			\item
+				Euclid空間$\mathbb{R}^n$の等長変換が
+				$\Phi(x)=Ax+b$（$A$は$n$次直交行列，$b$は$\mathbb{R}^n$のベクトル）の形に表されるものに
+				限られることを示せ．
+			\item
+				球面$S^n$の等長変換が$\mathbb{R}^{n+1}$の直交変換の制限によって得られるものに
+				限られることを示せ．
+		\end{enumerate-subproblems}
+	\item[7.4]
+		$\gamma\colon I\to M$を速さ$1$の測地線とする（ただし$I\subset\mathbb{R}$は$0$を含む区間）．
+		$p=\gamma(0)$において
+		$\dot{\gamma}(0)$，$v_2$，……，$v_n$が$T_pM$の正規直交基底となるように
+		$n-1$個のベクトル$v_j$（$2\leqq j\leqq n$）をとる．
+		各$j$に対し，$e_j(t)$を$e_j(0)=v_j$をみたす$\gamma$に沿って定義された平行ベクトル場とする．
+		すると各$t\in I$において$\dot{\gamma}(t)$，$e_2(t)$，……，$e_n(t)$は$T_{\gamma(t)}M$の正規直交基底である．
+
+		逆に，速さ$1$の曲線$\gamma\colon I\to M$に沿って平行ベクトル場$e_2(t)$，……，$e_n(t)$が定義されており，
+		各$t\in I$に対し$\dot{\gamma}(t)$，$e_2(t)$，……，$e_n(t)$が$T_{\gamma(t)}M$の正規直交基底であるとする．
+		そのとき$\gamma$は測地線であることを示せ．
+	\item[7.5]
+		Riemann多様体$(M,g)$の点$p\in M$において正規球$B_\varepsilon(p)$をとり，
+		この正規球における正規座標系$(x^1,\dots,x^n)$を考える．
+		\begin{enumerate-subproblems}
+			\item
+				$(x^1,\dots,x^n)$に関するChristoffel記号$\tensor{\Gamma}{^k_i_j}$の点$p$における値が
+				すべて$0$であることを示せ．
+				［ヒント：任意の$a=(a^1,\dots,a^n)\in\mathbb{R}^n$に対して
+				$\gamma(t)=(a^1t,\dots,a^nt)$は測地線である．これを測地線の方程式に代入する．］
+			\item
+				$(x^1,\dots,x^n)$に関して$(\partial\tensor{g}{_i_j}/\partial x^k)(p)=0$であることを示せ．
+		\end{enumerate-subproblems}
+
+		（実は$\tensor{g}{_i_j}$の2次までのTaylor展開は
+		\begin{equation}
+			\tensor{g}{_i_j}=\tensor{\delta}{_i_j}-\frac{1}{3}\tensor{R}{_i_k_j_l}(p)x^kx^l+O(\abs{x}^3)
+		\end{equation}
+		で与えられる（第12回？）．
+		つまりRiemann曲率テンソルは，正規座標系における$g$とEuclid計量のずれの主要部を表している．）
+\end{enumerate-problems}
+
+\end{document}
